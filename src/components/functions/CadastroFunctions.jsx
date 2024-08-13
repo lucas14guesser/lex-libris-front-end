@@ -18,7 +18,7 @@ export default function CadastroFunction() {
                 return;
             }
 
-            const response = await axios.post('http://localhost:3001/lex/auth/cadastro', {
+            const response = await axios.post('https://4b5a-2804-1530-106-e84e-87a-bf34-f900-b86c.ngrok-free.app/lex/auth/cadastro', {
                 cpf_adv: cpf,
                 senha_adv: senha,
                 nome_adv: nome
