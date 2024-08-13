@@ -1,15 +1,13 @@
-import React from "react";
-import { GlobalStyle } from "@/theme/GlobalStyles";
+import React from 'react';
+import { GlobalStyle } from '../src/theme/GlobalStyles';
 
-function MyApp({ Component, pageProps}) {
-    return (
-        <>
-            <React.Fragment>
-                <GlobalStyle />
-                <Component {...pageProps} />
-            </React.Fragment>
-        </>
-    )
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;

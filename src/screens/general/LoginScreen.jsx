@@ -1,4 +1,6 @@
 import LoginFunctions from "@/components/functions/LoginFunctions";
+import { CamposInput, ContainerFormulario, Formulario, TextoLabel, Titulo } from "@/theme/GlobalStyles";
+import { ContainerLogin } from "@/theme/LoginScreenStyles";
 
 export default function LoginScreen() {
     const {
@@ -9,23 +11,27 @@ export default function LoginScreen() {
         handleLogin
     } = LoginFunctions();
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="CPF"
-                    value={cpf}
-                    onChange={(e) => setCpf(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                />
-                <button type="submit">Entrar</button>
-            </form>
-        </div>
+        <ContainerLogin>
+            <ContainerFormulario>
+                <Titulo>Entrar</Titulo>
+                <Formulario onSubmit={handleLogin}>
+                    <TextoLabel htmlFor="cpf">CPF</TextoLabel>
+                    <CamposInput
+                        type="text"
+                        placeholder="Digite seu CPF..."
+                        value={cpf}
+                        onChange={(e) => setCpf(e.target.value)}
+                    />
+                    <TextoLabel htmlFor="senha">Senha</TextoLabel>
+                    <CamposInput
+                        type="password"
+                        placeholder="Digite aqui sua senha..."
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                    />
+                    <button type="submit">Entrar</button>
+                </Formulario>
+            </ContainerFormulario>
+        </ContainerLogin>
     );
 }

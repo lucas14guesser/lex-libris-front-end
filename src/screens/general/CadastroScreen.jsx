@@ -1,4 +1,5 @@
 import CadastroFunction from "@/components/functions/CadastroFunctions";
+import { Titulo } from "@/theme/GlobalStyles";
 
 export default function CadastroScreen() {
     const {
@@ -14,7 +15,7 @@ export default function CadastroScreen() {
     
     return (
         <div>
-            <h1>Cadastro</h1>
+            <Titulo>Cadastro</Titulo>
             <form onSubmit={handleCadastro}>
                 <input
                     type="text"

@@ -1,48 +1,45 @@
-import { createGlobalStyle } from "styled-components"
-
+import { createGlobalStyle, styled } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html, body {
+font-family: "Gill Sans", sans-serif;
+background-color: #E6E6E6;
+line-height: 1;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+`
+export const Titulo = styled.h1`
+font-size: 2.5rem;
+color: #000000;
+margin-bottom: 3rem;
+`
+export const ContainerFormulario = styled.div`
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+justify-content: center;
+text-align: center;
+align-items: center;
+padding: 7rem;
+background: #FFFFFF;
+border: .1rem solid #E6E6E6;
+border-radius: 2.7rem;
+`
+export const Formulario = styled.form`
+display: flex;
+justify-content: center;
+text-align: start;
+align-items: center;
+flex-direction: column;
+flex-wrap: wrap;
+gap: .7rem;
+`
+export const TextoLabel = styled.label`
+font-size: 1.1rem;
+`
+export const CamposInput = styled.input`
+width: 15rem;
+border: .1rem solid #000000;
+border-radius: .7rem;
+background: #FFFFFF;
+padding: .5rem;
 `
