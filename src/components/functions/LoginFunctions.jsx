@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 export default function LoginFunctions() {
-    const [cpf, setCpf] = useState('');
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const router = useRouter();
 
@@ -12,7 +12,7 @@ export default function LoginFunctions() {
 
         try {
             const response = await axios.post('http://localhost:3001/lex/auth/login', {
-                cpf_adv: cpf,
+                email_adv: email,
                 senha_adv: senha
             });
             const { data } = response;
@@ -21,12 +21,12 @@ export default function LoginFunctions() {
                 localStorage.setItem('user', JSON.stringify(data.user));
 
                 if (data.user.role === 'admin') {
-                    router.push('/admin-dashboard');
+                    router.push('/adminDashboard');
                 } else {
-                    router.push('/user-dashboard');
+                    router.push('/userDashboard');
                 }
 
-                setCpf('');
+                setEmail('');
                 setSenha('');
             } else {
                 alert('Login falhou. Verifique suas credenciais.');
@@ -37,8 +37,8 @@ export default function LoginFunctions() {
         }
     };
     return {
-        cpf,
-        setCpf,
+        email,
+        setEmail,
         senha,
         setSenha,
         handleLogin

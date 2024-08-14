@@ -1,37 +1,60 @@
+import React from "react";
+import Head from "next/head";
 import LoginFunctions from "@/components/functions/LoginFunctions";
-import { CamposInput, ContainerFormulario, Formulario, TextoLabel, Titulo } from "@/theme/GlobalStyles";
-import { ContainerLogin } from "@/theme/LoginScreenStyles";
+import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo } from "@/theme/GlobalStyles";
+import { ContainerLogin, ContainerLogoLogin, LogoLogin } from "@/theme/LoginScreenStyles";
+import { RiUser3Line, RiLockPasswordLine } from "react-icons/ri";
+import Link from "next/link";
 
 export default function LoginScreen() {
     const {
-        cpf,
-        setCpf,
+        email,
+        setEmail,
         senha,
         setSenha,
         handleLogin
     } = LoginFunctions();
     return (
-        <ContainerLogin>
-            <ContainerFormulario>
-                <Titulo>Entrar</Titulo>
-                <Formulario onSubmit={handleLogin}>
-                    <TextoLabel htmlFor="cpf">CPF</TextoLabel>
-                    <CamposInput
-                        type="text"
-                        placeholder="Digite seu CPF..."
-                        value={cpf}
-                        onChange={(e) => setCpf(e.target.value)}
-                    />
-                    <TextoLabel htmlFor="senha">Senha</TextoLabel>
-                    <CamposInput
-                        type="password"
-                        placeholder="Digite aqui sua senha..."
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                    />
-                    <button type="submit">Entrar</button>
-                </Formulario>
-            </ContainerFormulario>
-        </ContainerLogin>
+        <React.Fragment>
+            <Head>
+                <title>Lex Libris - Login</title>
+            </Head>
+            <Link href="/">Ir para a Home</Link>
+            <ContainerLogin>
+                <ContainerFormulario>
+                    <ContainerLogoLogin>
+                        <LogoLogin
+                            src="\assets\lex-libris-logo.png" alt="lex-libris-logo"
+                        />
+                    </ContainerLogoLogin>
+                    <Titulo>
+                        Login
+                    </Titulo>
+                    <Formulario onSubmit={handleLogin}>
+                        <ContainerLabelInput>
+                            <TextoLabel htmlFor="email"><RiUser3Line /></TextoLabel>
+                            <CamposInput
+                                type="text"
+                                placeholder="Digite aqui seu e-mail..."
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </ContainerLabelInput>
+                        <ContainerLabelInput>
+                            <TextoLabel htmlFor="senha"><RiLockPasswordLine /></TextoLabel>
+                            <CamposInput
+                                type="password"
+                                placeholder="Digite aqui sua senha..."
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                            />
+                        </ContainerLabelInput>
+                        <BotaoSubmit type="submit">
+                            Entrar
+                        </BotaoSubmit>
+                    </Formulario>
+                </ContainerFormulario>
+            </ContainerLogin>
+        </React.Fragment>
     );
 }

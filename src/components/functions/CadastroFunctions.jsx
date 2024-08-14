@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 export default function CadastroFunction() {
     const [cpf, setCpf] = useState('');
     const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
@@ -13,13 +14,14 @@ export default function CadastroFunction() {
         e.preventDefault();
 
         try {
-            if (!cpf || !nome || !senha) {
+            if (!cpf || !nome || !email || !senha) {
                 setError('Todos os campos são obrigatórios');
                 return;
             }
 
-            const response = await axios.post('https://4b5a-2804-1530-106-e84e-87a-bf34-f900-b86c.ngrok-free.app/lex/auth/cadastro', {
+            const response = await axios.post('http://localhost:3001/lex/auth/cadastro', {
                 cpf_adv: cpf,
+                email_adv: email,
                 senha_adv: senha,
                 nome_adv: nome
             });
@@ -27,9 +29,10 @@ export default function CadastroFunction() {
             if (response.status === 201) {
                 alert('Cadastro realizado com sucesso!');
                 setCpf('');
+                setEmail('');
                 setNome('');
                 setSenha('');
-                router.push('/user-dashboard');
+                router.push('/confirmacaoEmail');
             }
         } catch (error) {
             console.error('Erro no cadastro', error);
@@ -44,6 +47,8 @@ export default function CadastroFunction() {
         setSenha,
         nome,
         setNome,
+        email,
+        setEmail,
         error,
         handleCadastro
     };

@@ -1,45 +1,82 @@
 import { createGlobalStyle, styled } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
-html, body {
-font-family: "Gill Sans", sans-serif;
+#root, html, body {
 background-color: #E6E6E6;
 line-height: 1;
+color: #000D20;
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+vertical-align: baseline;
 }
 `
 export const Titulo = styled.h1`
-font-size: 2.5rem;
-color: #000000;
-margin-bottom: 3rem;
+font-size: 3rem;
+margin-top: 3rem;
+font-family: "Roboto", sans-serif;
 `
 export const ContainerFormulario = styled.div`
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-justify-content: center;
-text-align: center;
-align-items: center;
-padding: 7rem;
 background: #FFFFFF;
 border: .1rem solid #E6E6E6;
 border-radius: 2.7rem;
+width: 40rem;
 `
 export const Formulario = styled.form`
 display: flex;
-justify-content: center;
-text-align: start;
-align-items: center;
 flex-direction: column;
+justify-content: center;
+align-items: center;
 flex-wrap: wrap;
-gap: .7rem;
+gap: 2rem;
+padding: 1rem 4rem;
+`
+export const ContainerLabelInput = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 `
 export const TextoLabel = styled.label`
-font-size: 1.1rem;
+font-size: 1.25rem;
+font-family: "Roboto", sans-serif;
 `
 export const CamposInput = styled.input`
-width: 15rem;
-border: .1rem solid #000000;
+	width: 15rem;
+    border: none;
+	border-bottom: .1rem solid #000D20;
+	background: #FFFFFF;
+	padding: .5rem;
+    outline: none;
+
+    &:focus {
+        transition: 0.13s;
+        border-bottom: .13rem solid #000D20;
+    }
+    &::placeholder {
+        color: #000D20;
+        font-size: 1rem;
+        font-family: "Roboto", sans-serif;
+
+    }
+`
+export const BotaoSubmit = styled.button`
+padding: .7rem;
+width: 10rem;
+background: #000D20;
+border: .1rem solid #000D20;
 border-radius: .7rem;
-background: #FFFFFF;
-padding: .5rem;
+margin-top: 1rem;
+margin-bottom: 2rem;
+cursor: pointer;
+color: #FFFFFF;
+font-size: 1.1rem;
+font-family: "Roboto", sans-serif;
+
+    &:hover {
+        transition: 0.3s;
+        background: #FFFFFF;
+        color: #000D20;
+    }
 `
