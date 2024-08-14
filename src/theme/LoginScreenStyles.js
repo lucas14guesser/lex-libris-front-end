@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const ContainerLogin = styled.div`
 display: flex;
@@ -22,4 +23,16 @@ height: 17.5rem;
 `
 export const LogoLogin = styled.img`
 width: 10rem;
+`
+export const ContainerLoginForgot = styled.div`
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+gap: 2rem;
+align-items: baseline;
+`
+export const LinkForgot = styled(Link)`
+font-size: 1.1rem;
+text-decoration: underline;
+color: #000D20;
 `

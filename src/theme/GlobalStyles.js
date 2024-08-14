@@ -68,7 +68,6 @@ background: #000D20;
 border: .1rem solid #000D20;
 border-radius: .7rem;
 margin-top: 1rem;
-margin-bottom: 2rem;
 cursor: pointer;
 color: #FFFFFF;
 font-size: 1.1rem;
@@ -79,4 +78,7 @@ font-family: "Roboto", sans-serif;
         background: #FFFFFF;
         color: #000D20;
     }
+`
+export const StyledError = styled.p`
+color: red;
 `

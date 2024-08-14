@@ -7,6 +7,7 @@ export default function CadastroFunction() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [confirmarSenha, setConfirmarSenha] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
 
@@ -14,8 +15,13 @@ export default function CadastroFunction() {
         e.preventDefault();
 
         try {
-            if (!cpf || !nome || !email || !senha) {
+            if (!cpf || !nome || !email || !senha || !confirmarSenha) {
                 setError('Todos os campos são obrigatórios');
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                setError('As senhas não coincidem');
                 return;
             }
 
@@ -27,11 +33,11 @@ export default function CadastroFunction() {
             });
 
             if (response.status === 201) {
-                alert('Cadastro realizado com sucesso!');
                 setCpf('');
                 setEmail('');
                 setNome('');
                 setSenha('');
+                setConfirmarSenha('');
                 router.push('/confirmacaoEmail');
             }
         } catch (error) {
@@ -45,6 +51,8 @@ export default function CadastroFunction() {
         setCpf,
         senha,
         setSenha,
+        confirmarSenha,
+        setConfirmarSenha,
         nome,
         setNome,
         email,

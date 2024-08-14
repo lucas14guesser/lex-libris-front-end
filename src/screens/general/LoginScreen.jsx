@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import LoginFunctions from "@/components/functions/LoginFunctions";
-import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo } from "@/theme/GlobalStyles";
-import { ContainerLogin, ContainerLogoLogin, LogoLogin } from "@/theme/LoginScreenStyles";
+import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError } from "@/theme/GlobalStyles";
+import { ContainerLogin, ContainerLoginForgot, ContainerLogoLogin, LinkForgot, LogoLogin } from "@/theme/LoginScreenStyles";
 import { RiUser3Line, RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -12,6 +12,7 @@ export default function LoginScreen() {
         setEmail,
         senha,
         setSenha,
+        error,
         handleLogin
     } = LoginFunctions();
     return (
@@ -49,10 +50,14 @@ export default function LoginScreen() {
                                 onChange={(e) => setSenha(e.target.value)}
                             />
                         </ContainerLabelInput>
-                        <BotaoSubmit type="submit">
-                            Entrar
-                        </BotaoSubmit>
+                        <ContainerLoginForgot>
+                            <LinkForgot href="/esqueciMinhaSenha">Esqueci minha senha</LinkForgot>
+                            <BotaoSubmit type="submit">
+                                Entrar
+                            </BotaoSubmit>
+                        </ContainerLoginForgot>
                     </Formulario>
+                    {error && <StyledError>{error}</StyledError>}
                 </ContainerFormulario>
             </ContainerLogin>
         </React.Fragment>
