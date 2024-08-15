@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import LoginFunctions from "@/components/functions/LoginFunctions";
 import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError } from "@/theme/GlobalStyles";
-import { ContainerLogin, ContainerLoginForgot, ContainerLogoLogin, LinkForgot, LogoLogin } from "@/theme/LoginScreenStyles";
+import { ContainerLogin, ContainerLoginForgot, ContainerLogoLogin, LinkCadastreSe, LinkForgot, LogoLogin } from "@/theme/LoginScreenStyles";
 import { RiUser3Line, RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -50,8 +50,9 @@ export default function LoginScreen() {
                                 onChange={(e) => setSenha(e.target.value)}
                             />
                         </ContainerLabelInput>
+                        <LinkForgot href="/esqueciMinhaSenha">Esqueceu sua senha?</LinkForgot>
                         <ContainerLoginForgot>
-                            <LinkForgot href="/esqueciMinhaSenha">Esqueci minha senha</LinkForgot>
+                        <LinkCadastreSe href='/cadastro'>Criar conta</LinkCadastreSe>
                             <BotaoSubmit type="submit">
                                 Entrar
                             </BotaoSubmit>
