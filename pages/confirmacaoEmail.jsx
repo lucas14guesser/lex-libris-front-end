@@ -1,11 +1,3 @@
-import Link from "next/link";
+import ConfirmacaoEmailScreen from "@/screens/general/ConfirmacaoEmailScreen";
 
-export default function confirmacaoEmail() {
-    return (
-        <>
-            <h1>Confirme seu email</h1>
-            <p>Para poder entrar no seu usuario, você precisa verificar seu email.</p>
-            <Link href="/">Ir para a Home</Link>
-        </>
-    )
-}
+export default ConfirmacaoEmailScreen;

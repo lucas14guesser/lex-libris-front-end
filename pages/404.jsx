@@ -1,10 +1,3 @@
-import Link from "next/link";
+import NotFoundSCreen from '../src/screens/general/404Screen';
 
-export default function HomePage() {
-    return (
-        <div>
-            <h1>404 not found - Página não encontrada</h1>
-            <Link href='/'>Home</Link>
-        </div>
-    )
-}
+export default NotFoundSCreen;

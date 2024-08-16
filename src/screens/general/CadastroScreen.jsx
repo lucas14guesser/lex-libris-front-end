@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import CadastroFunction from "@/components/functions/CadastroFunctions";
-import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError } from "@/theme/GlobalStyles";
-import { ContainerCadastro, ContainerLogoCadastro, LogoCadastro } from "@/theme/CadastroScreenStyles";
+import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError, Container, ContainerLogo, LogoFormulario } from "@/theme/GlobalStyles";
+import { ContainerHaveAccountCadastrar, LinkHaveAccount } from "@/theme/CadastroScreenStyles";
 import { RiUser3Line, RiLockPasswordLine, RiIdCardLine, RiMailLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -28,14 +28,10 @@ export default function CadastroScreen() {
                 <title>Lex Libris - Cadastro</title>
             </Head>
             <Link href="/">Ir para a Home</Link>
-            <ContainerCadastro>
+            <Container>
                 <ContainerFormulario>
-                    <ContainerLogoCadastro>
-                        <LogoCadastro
-                            src="\assets\lex-libris-logo.png" alt="lex-libris-logo"
-                        />
-                    </ContainerLogoCadastro>
-
+                    <ContainerLogo>
+                    </ContainerLogo>
                     <Titulo>
                         Cadastro
                     </Titulo>
@@ -90,13 +86,16 @@ export default function CadastroScreen() {
                                 onChange={(e) => setConfirmarSenha(e.target.value)}
                             />
                         </ContainerLabelInput>
-                        <BotaoSubmit type="submit">
-                            Cadastrar
-                        </BotaoSubmit>
+                        <ContainerHaveAccountCadastrar>
+                            <LinkHaveAccount href='/login'>Sou cadastrado</LinkHaveAccount>
+                            <BotaoSubmit type="submit">
+                                Cadastrar
+                            </BotaoSubmit>
+                        </ContainerHaveAccountCadastrar>
                     </Formulario>
                     {error && <StyledError>{error}</StyledError>}
                 </ContainerFormulario>
-            </ContainerCadastro>
+            </Container>
         </React.Fragment>
     );
 }

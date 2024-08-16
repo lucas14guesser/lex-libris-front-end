@@ -1,4 +1,5 @@
 import { createGlobalStyle, styled } from "styled-components"
+import Link from "next/link"
 
 export const GlobalStyle = createGlobalStyle`
 #root, html, body {
@@ -10,12 +11,33 @@ padding: 0;
 border: 0;
 font-size: 100%;
 vertical-align: baseline;
+font-family: "Roboto", sans-serif;
 }
 `
 export const Titulo = styled.h1`
 font-size: 3rem;
 margin-top: 3rem;
+color: #000D20;
 font-family: "Roboto", sans-serif;
+`
+export const Container = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+align-items: center;
+flex-wrap: wrap;
+width: 100%;
+`
+export const ContainerLogo = styled.div`
+width: 100%;
+background-image: url("/assets/lex-libris-logo.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+border-top-left-radius: 2.7rem;
+border-top-right-radius: 2.7rem;
+height: 17.5rem;
 `
 export const ContainerFormulario = styled.div`
 background: #FFFFFF;
@@ -81,4 +103,13 @@ font-family: "Roboto", sans-serif;
 `
 export const StyledError = styled.p`
 color: red;
+`
+export const StyledSuccess = styled.p`
+color: green;
+`
+export const LinkRedirect = styled(Link)`
+font-size: 1.1rem;
+color: #000D20;
+text-decoration: underline;
+margin-top: 1rem;
 `

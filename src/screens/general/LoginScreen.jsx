@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import LoginFunctions from "@/components/functions/LoginFunctions";
-import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError } from "@/theme/GlobalStyles";
-import { ContainerLogin, ContainerLoginForgot, ContainerLogoLogin, LinkCadastreSe, LinkForgot, LogoLogin } from "@/theme/LoginScreenStyles";
+import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError, Container, ContainerLogo, LogoFormulario } from "@/theme/GlobalStyles";
+import { ContainerLoginForgot, LinkCadastreSe, LinkForgot } from "@/theme/LoginScreenStyles";
 import { RiUser3Line, RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -21,13 +21,10 @@ export default function LoginScreen() {
                 <title>Lex Libris - Login</title>
             </Head>
             <Link href="/">Ir para a Home</Link>
-            <ContainerLogin>
+            <Container>
                 <ContainerFormulario>
-                    <ContainerLogoLogin>
-                        <LogoLogin
-                            src="\assets\lex-libris-logo.png" alt="lex-libris-logo"
-                        />
-                    </ContainerLogoLogin>
+                    <ContainerLogo>
+                    </ContainerLogo>
                     <Titulo>
                         Login
                     </Titulo>
@@ -60,7 +57,7 @@ export default function LoginScreen() {
                     </Formulario>
                     {error && <StyledError>{error}</StyledError>}
                 </ContainerFormulario>
-            </ContainerLogin>
+            </Container>
         </React.Fragment>
     );
 }
