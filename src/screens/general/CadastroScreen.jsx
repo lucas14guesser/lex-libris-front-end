@@ -116,9 +116,17 @@ export default function CadastroScreen() {
                             </BotaoSubmit>
                         </ContainerHaveAccountCadastrar>
                     </Formulario>
-                    {error && <StyledError>
-                        {error}
-                    </StyledError>}
+                    {error && (
+                        <StyledError>
+                            {error.split('\n').map((line, index) => (
+                                <React.Fragment
+                                    key={index}>
+                                    {line}
+                                    <br />
+                                </React.Fragment>
+                            ))}
+                        </StyledError>
+                    )}
                 </ContainerFormulario>
             </Container>
         </React.Fragment>

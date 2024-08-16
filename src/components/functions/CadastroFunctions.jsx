@@ -41,8 +41,12 @@ export default function CadastroFunction() {
                 router.push('/confirmacaoEmail');
             }
         } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('Erro no cadastro. Verifique os dados e tente novamente.');
+            }
             console.error('Erro no cadastro', error);
-            setError('Erro no cadastro. Verifique os dados e tente novamente.');
         }
     };
 

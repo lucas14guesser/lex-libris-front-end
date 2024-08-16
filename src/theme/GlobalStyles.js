@@ -102,10 +102,16 @@ font-family: "Roboto", sans-serif;
     }
 `
 export const StyledError = styled.p`
+font-size: .9rem;
 color: red;
+margin-bottom: 1rem;
+white-space: pre-wrap;
 `
 export const StyledSuccess = styled.p`
+font-size: .9rem;
 color: green;
+margin-bottom: 1rem;
+white-space: pre-wrap;
 `
 export const LinkRedirect = styled(Link)`
 font-size: 1.1rem;

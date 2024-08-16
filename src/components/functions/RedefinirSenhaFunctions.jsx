@@ -13,6 +13,11 @@ export default function RedefinirSenhaFunction() {
     const handleRedefinirSenha = async (e) => {
         e.preventDefault();
 
+        if(!novaSenha || !confirmarNovaSenha) {
+            setError('Os campos de senha precisam ser preenchidos');
+            return;
+        }
+
         if (!novaSenha || novaSenha !== confirmarNovaSenha) {
             setError('As senhas devem coincidir.');
             return;
@@ -39,8 +44,12 @@ export default function RedefinirSenhaFunction() {
                 setError('Erro ao redefinir a senha. Código de status: ' + response.status);
             }
         } catch (error) {
-            console.error('Erro ao enviar a requisição:', error.response ? error.response.data : error.message);
-            setError('Erro ao enviar a requisição. Detalhes: ' + (error.response ? error.response.data.message : error.message));
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('Erro ao redefinir nova senha.');
+            }
+            console.error('Erro ao redefinir nova senha', error);
         }
     }
 

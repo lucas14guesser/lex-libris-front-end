@@ -50,9 +50,17 @@ export default function RedefinirSenhaScreen() {
                                 onChange={(e) => setConfirmarNovaSenha(e.target.value)}
                             />
                         </ContainerLabelInput>
-                        {error && <StyledError>
-                            {error}
-                        </StyledError>}
+                        {error && (
+                            <StyledError>
+                                {error.split('\n').map((line, index) => (
+                                    <React.Fragment
+                                        key={index}>
+                                        {line}
+                                        <br />
+                                    </React.Fragment>
+                                ))}
+                            </StyledError>
+                        )}
                         {success && <StyledSuccess>
                             {success}
                         </StyledSuccess>}
