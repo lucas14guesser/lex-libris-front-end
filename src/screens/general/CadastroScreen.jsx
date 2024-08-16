@@ -27,7 +27,10 @@ export default function CadastroScreen() {
             <Head>
                 <title>Lex Libris - Cadastro</title>
             </Head>
-            <Link href="/">Ir para a Home</Link>
+            <Link
+                href="/">
+                Ir para a Home
+            </Link>
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo>
@@ -35,9 +38,13 @@ export default function CadastroScreen() {
                     <Titulo>
                         Cadastro
                     </Titulo>
-                    <Formulario onSubmit={handleCadastro}>
+                    <Formulario
+                        onSubmit={handleCadastro}>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="cpf"><RiUser3Line /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="cpf">
+                                <RiUser3Line />
+                            </TextoLabel>
                             <CamposInput
                                 type="text"
                                 id="cpf"
@@ -47,7 +54,10 @@ export default function CadastroScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="nome"><RiIdCardLine /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="nome">
+                                <RiIdCardLine />
+                            </TextoLabel>
                             <CamposInput
                                 type="text"
                                 id="nome"
@@ -57,7 +67,10 @@ export default function CadastroScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="email"><RiMailLine /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="email">
+                                <RiMailLine />
+                            </TextoLabel>
                             <CamposInput
                                 type="text"
                                 id="email"
@@ -67,7 +80,10 @@ export default function CadastroScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="senha"><RiLockPasswordLine /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="senha">
+                                <RiLockPasswordLine />
+                            </TextoLabel>
                             <CamposInput
                                 type="password"
                                 id="senha"
@@ -77,7 +93,10 @@ export default function CadastroScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="confirmarSenha"><RiLockPasswordLine /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="confirmarSenha"
+                            ><RiLockPasswordLine />
+                            </TextoLabel>
                             <CamposInput
                                 type="password"
                                 id="repetirSenha"
@@ -87,13 +106,19 @@ export default function CadastroScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerHaveAccountCadastrar>
-                            <LinkHaveAccount href='/login'>Sou cadastrado</LinkHaveAccount>
-                            <BotaoSubmit type="submit">
+                            <LinkHaveAccount
+                                href='/login'>
+                                Sou cadastrado
+                            </LinkHaveAccount>
+                            <BotaoSubmit
+                                type="submit">
                                 Cadastrar
                             </BotaoSubmit>
                         </ContainerHaveAccountCadastrar>
                     </Formulario>
-                    {error && <StyledError>{error}</StyledError>}
+                    {error && <StyledError>
+                        {error}
+                    </StyledError>}
                 </ContainerFormulario>
             </Container>
         </React.Fragment>

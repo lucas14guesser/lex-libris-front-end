@@ -20,7 +20,10 @@ export default function LoginScreen() {
             <Head>
                 <title>Lex Libris - Login</title>
             </Head>
-            <Link href="/">Ir para a Home</Link>
+            <Link
+                href="/">
+                Ir para a Home
+            </Link>
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo>
@@ -28,9 +31,13 @@ export default function LoginScreen() {
                     <Titulo>
                         Login
                     </Titulo>
-                    <Formulario onSubmit={handleLogin}>
+                    <Formulario
+                        onSubmit={handleLogin}>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="email"><RiUser3Line /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="email">
+                                <RiUser3Line />
+                            </TextoLabel>
                             <CamposInput
                                 type="text"
                                 placeholder="Digite aqui seu e-mail..."
@@ -39,7 +46,10 @@ export default function LoginScreen() {
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
-                            <TextoLabel htmlFor="senha"><RiLockPasswordLine /></TextoLabel>
+                            <TextoLabel
+                                htmlFor="senha">
+                                <RiLockPasswordLine />
+                            </TextoLabel>
                             <CamposInput
                                 type="password"
                                 placeholder="Digite aqui sua senha..."
@@ -47,15 +57,24 @@ export default function LoginScreen() {
                                 onChange={(e) => setSenha(e.target.value)}
                             />
                         </ContainerLabelInput>
-                        <LinkForgot href="/esqueciMinhaSenha">Esqueceu sua senha?</LinkForgot>
+                        <LinkForgot
+                            href="/esqueciMinhaSenha">
+                            Esqueceu sua senha?
+                        </LinkForgot>
                         <ContainerLoginForgot>
-                        <LinkCadastreSe href='/cadastro'>Criar conta</LinkCadastreSe>
-                            <BotaoSubmit type="submit">
+                            <LinkCadastreSe
+                                href='/cadastro'>
+                                Criar conta
+                            </LinkCadastreSe>
+                            <BotaoSubmit
+                                type="submit">
                                 Entrar
                             </BotaoSubmit>
                         </ContainerLoginForgot>
                     </Formulario>
-                    {error && <StyledError>{error}</StyledError>}
+                    {error && <StyledError>
+                        {error}
+                    </StyledError>}
                 </ContainerFormulario>
             </Container>
         </React.Fragment>

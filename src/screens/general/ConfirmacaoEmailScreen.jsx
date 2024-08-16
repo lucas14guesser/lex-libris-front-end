@@ -13,12 +13,23 @@ export default function ConfirmacaoEmailScreen() {
                 <ContainerFormulario>
                     <ContainerLogo>
                     </ContainerLogo>
-                    <Titulo>Confirme seu e-mail</Titulo>
+                    <Titulo>
+                        Confirme seu e-mail
+                    </Titulo>
                     <ContainerTxtLinkConfirmacaoEmail>
-                        <TxtConfirmacaoEmail>Foi enviado para você um e-mail de confirmação.</TxtConfirmacaoEmail>
-                        <TxtConfirmacaoEmail>Por favor cheque sua caixa de entrada ou Spam.</TxtConfirmacaoEmail>
-                        <TxtConfirmacaoEmail>Para acessar o sistema, é necesserário validar o seu e-mail</TxtConfirmacaoEmail>
-                        <LinkRedirect href="/">Ir para a Home</LinkRedirect>
+                        <TxtConfirmacaoEmail>
+                            Foi enviado para você um e-mail de confirmação.
+                        </TxtConfirmacaoEmail>
+                        <TxtConfirmacaoEmail>
+                            Por favor cheque sua caixa de entrada ou Spam.
+                        </TxtConfirmacaoEmail>
+                        <TxtConfirmacaoEmail>
+                            Para acessar o sistema, é necesserário validar o seu e-mail
+                        </TxtConfirmacaoEmail>
+                        <LinkRedirect
+                            href="/">
+                            Ir para a Home
+                        </LinkRedirect>
                     </ContainerTxtLinkConfirmacaoEmail>
                 </ContainerFormulario>
             </Container>

@@ -12,10 +12,17 @@ export default function PaginaConfirmacaoScreen() {
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo />
-                    <Titulo>E-mail confirmado</Titulo>
+                    <Titulo>
+                        E-mail confirmado
+                    </Titulo>
                     <ContainerTxtLinkPaginaConfirmacao>
-                        <TxtPaginaConfirmacao>Seu e-mail foi confirmado com sucesso!</TxtPaginaConfirmacao>
-                        <LinkRedirect href='/userDashboard'>Ir para seu usuario</LinkRedirect>
+                        <TxtPaginaConfirmacao>
+                            Seu e-mail foi confirmado com sucesso!
+                        </TxtPaginaConfirmacao>
+                        <LinkRedirect
+                            href='/userDashboard'>
+                            Ir para seu usuario
+                        </LinkRedirect>
                     </ContainerTxtLinkPaginaConfirmacao>
                 </ContainerFormulario>
             </Container>
