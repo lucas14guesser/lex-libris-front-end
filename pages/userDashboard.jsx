@@ -1,10 +1,3 @@
-import Link from "next/link";
+import UserDashboardScreen from "@/screens/users/UserDashboardScreen";
 
-export default function UserPage() {
-    return (
-        <>
-            <h1>Pagina do usuário</h1>
-            <Link href='/'>Home</Link>
-        </>
-    )
-}
+export default UserDashboardScreen;

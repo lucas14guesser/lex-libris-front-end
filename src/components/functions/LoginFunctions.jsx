@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useUser } from '../../context/UserContext';;
 
 export default function LoginFunctions() {
     const [email, setEmail] = useState('');
@@ -8,13 +9,14 @@ export default function LoginFunctions() {
     const [error, setError] = useState('');
 
     const router = useRouter();
+    const { setUserEmail } = useUser(); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            if (!email || !senha)  {
-                setError('É necessário preencher os campos para entrar')
+            if (!email || !senha) {
+                setError('É necessário preencher os campos para entrar');
                 return;
             }
 
@@ -26,6 +28,7 @@ export default function LoginFunctions() {
 
             if (data.success) {
                 localStorage.setItem('user', JSON.stringify(data.user));
+                setUserEmail(data.user.email_adv);
 
                 if (data.user.role === 'admin') {
                     router.push('/adminDashboard');
@@ -36,15 +39,14 @@ export default function LoginFunctions() {
                 setEmail('');
                 setSenha('');
             } else {
-                setError('Login falhou. Verifique suas credenciais.');
+                setError('Verifique suas credenciais.');
                 return;
             }
         } catch (error) {
-            console.error('Erro no login', error);
-            setError('Erro no login. Tente novamente.');
+            setError('Verifique suas credenciais ou tente novamente mais tarde.');
         }
     };
-    
+
     return {
         email,
         setEmail,
@@ -52,5 +54,5 @@ export default function LoginFunctions() {
         setSenha,
         error,
         handleLogin
-    }
+    };
 }

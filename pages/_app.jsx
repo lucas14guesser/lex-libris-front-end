@@ -1,11 +1,14 @@
 import React from 'react';
 import { GlobalStyle } from '../src/theme/GlobalStyles';
+import { UserProvider } from '@/context/UserContext';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </>
   );
 }
