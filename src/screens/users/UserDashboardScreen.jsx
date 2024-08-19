@@ -2,7 +2,7 @@ import Link from "next/link";
 import useUserDashboard from "../../components/functions/UserDashboardFunctions";
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, userEmail, nomeEscritorio } = useUserDashboard();
+    const { nomeAdvogado, userEmail, nomeEscritorio, clientes } = useUserDashboard();
 
     return (
         <>
@@ -19,6 +19,13 @@ export default function UserDashboardScreen() {
                     ) : (
                         <p>Você ainda não cadastrou um escritório. Por favor, complete seu cadastro para acessar todas as funcionalidades.</p>
                     )}
+                </div>
+                <div>
+                    <ul>
+                        {clientes.map(cliente => (
+                            <li key={cliente.cpf}>{cliente.cpf} // {cliente.nome} // {cliente.telefone}</li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </>

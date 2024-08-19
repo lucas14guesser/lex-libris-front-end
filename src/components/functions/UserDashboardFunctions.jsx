@@ -6,6 +6,7 @@ export default function useUserDashboard() {
     const { userEmail } = useUser();
     const [nomeAdvogado, setNomeAdvogado] = useState('');
     const [nomeEscritorio, setNomeEscritorio] = useState('');
+    const [clientes, setClientes] = useState([]);
 
     useEffect(() => {
         const fetchDadosAdvogado = async () => {
@@ -39,10 +40,23 @@ export default function useUserDashboard() {
                 console.error('Erro ao buscar o nome do escritório:', error);
             }
         };
+        const fetchDadosClientes = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/lex/clientes');
+                if (response.data?.result?.length > 0) {
+                    setClientes(response.data.result);
+                } else {
+                    console.error('Resposta da API não contém dados válidos.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar os clientes:', error);
+            }
+        }
 
         fetchDadosAdvogado();
         fetchDadosEscritorio();
+        fetchDadosClientes();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail };
+    return { nomeAdvogado, nomeEscritorio, userEmail, clientes };
 }
