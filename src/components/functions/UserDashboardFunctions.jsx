@@ -7,16 +7,23 @@ export default function useUserDashboard() {
     const [nomeAdvogado, setNomeAdvogado] = useState('');
     const [nomeEscritorio, setNomeEscritorio] = useState('');
     const [clientes, setClientes] = useState([]);
+    const [processos, setProcessos] = useState([]);
 
     useEffect(() => {
         const fetchDadosAdvogado = async () => {
+            if (!userEmail) return;
             try {
-                const response = await axios.get(`http://localhost:3001/lex/advogado/${userEmail}`);
-                const nomeAdv = response.data && response.data.result && response.data.result.nome_adv;
-                if (nomeAdv) {
-                    setNomeAdvogado(nomeAdv);
+                const encodedEmail = encodeURIComponent(userEmail);
+                const response = await axios.get(`http://localhost:3001/lex/advogado/email/${encodedEmail}`)
+                if (response.data?.result) {
+                    const nomeAdv = response.data.result.nome_adv;
+                    if (nomeAdv) {
+                        setNomeAdvogado(nomeAdv);
+                    } else {
+                        console.error('Resposta da API não contém "nome_adv".');
+                    }
                 } else {
-                    console.error('Resposta da API não contém "nome_adv".');
+                    console.error('Resposta da API não contém resultados.');
                 }
             } catch (error) {
                 console.error('Erro ao buscar o nome do advogado:', error);
@@ -24,39 +31,49 @@ export default function useUserDashboard() {
         };
 
         const fetchDadosEscritorio = async () => {
+            if (!userEmail) return;
             try {
-                const response = await axios.get(`http://localhost:3001/lex/escritorio/${userEmail}`);
-                if (response.data && response.data.result && response.data.result.length > 0) {
+                const encodedEmail = encodeURIComponent(userEmail);
+                const response = await axios.get(`http://localhost:3001/lex/escritorio/advogado/${encodedEmail}`)
+                if (response.data?.result?.length > 0) {
                     const primeiroEscritorio = response.data.result[0];
-                    if (primeiroEscritorio && primeiroEscritorio.nome_escritorio) {
+                    if (primeiroEscritorio?.nome_escritorio) {
                         setNomeEscritorio(primeiroEscritorio.nome_escritorio);
                     } else {
                         console.error('Resposta da API não contém "nome_escritorio".');
                     }
                 } else {
-                    console.error('Resposta da API não contém dados válidos.');
+                    console.error('Resposta da API não contém resultados ou está vazia.');
                 }
             } catch (error) {
                 console.error('Erro ao buscar o nome do escritório:', error);
             }
         };
+
         const fetchDadosClientes = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/lex/clientes');
                 if (response.data?.result?.length > 0) {
                     setClientes(response.data.result);
+                    
+                    const clienteEnvolvs = response.data.result.map(cliente => cliente.cpf);
+                    const processos = await Promise.all(clienteEnvolvs.map(cpf => {
+                        return axios.get(`http://localhost:3001/lex/processo/cliente/${cpf}`)
+                            .then(response => response.data.result || []);
+                    }));
+                    setProcessos(processos.flat());
                 } else {
                     console.error('Resposta da API não contém dados válidos.');
                 }
             } catch (error) {
                 console.error('Erro ao buscar os clientes:', error);
             }
-        }
+        };
 
         fetchDadosAdvogado();
         fetchDadosEscritorio();
         fetchDadosClientes();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail, clientes };
+    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos };
 }
