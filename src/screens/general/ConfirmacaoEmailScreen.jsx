@@ -24,7 +24,7 @@ export default function ConfirmacaoEmailScreen() {
                             Por favor cheque sua caixa de entrada ou Spam.
                         </TxtConfirmacaoEmail>
                         <TxtConfirmacaoEmail>
-                            Para acessar o sistema, é necesserário validar o seu e-mail
+                            Para acessar o sistema, é necessário validar o seu e-mail
                         </TxtConfirmacaoEmail>
                         <LinkRedirect
                             href="/">
