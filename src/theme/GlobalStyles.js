@@ -15,8 +15,13 @@ font-family: "Roboto", sans-serif;
 }
 `
 export const Titulo = styled.h1`
-font-size: 3rem;
+font-size: 2rem;
 margin-top: 3rem;
+color: #000D20;
+font-family: "Roboto", sans-serif;
+`
+export const Subtitulo = styled.h2`
+font-size: 1.5rem;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `
