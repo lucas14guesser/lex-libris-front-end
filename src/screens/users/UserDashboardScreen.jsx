@@ -1,6 +1,6 @@
 import useUserDashboard from "../../components/functions/UserDashboardFunctions";
 import { Container, Titulo } from "@/theme/GlobalStyles";
-import { ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard, } from "@/theme/UserDashboardTheme";
+import { ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import React from "react";
 
 export default function UserDashboardScreen() {
@@ -46,4 +46,3 @@ export default function UserDashboardScreen() {
         </React.Fragment>
     );
 }
-

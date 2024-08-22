@@ -10,69 +10,49 @@ export default function useUserDashboard() {
     const [processos, setProcessos] = useState([]);
 
     useEffect(() => {
-        const fetchDadosAdvogado = async () => {
+        const fetchDados = async () => {
             if (!userEmail) return;
             try {
                 const encodedEmail = encodeURIComponent(userEmail);
-                const response = await axios.get(`http://localhost:3001/lex/advogado/email/${encodedEmail}`)
-                if (response.data?.result) {
-                    const nomeAdv = response.data.result.nome_adv;
-                    if (nomeAdv) {
-                        setNomeAdvogado(nomeAdv);
-                    } else {
-                        console.error('Resposta da API não contém "nome_adv".');
-                    }
-                } else {
-                    console.error('Resposta da API não contém resultados.');
-                }
-            } catch (error) {
-                console.error('Erro ao buscar o nome do advogado:', error);
-            }
-        };
 
-        const fetchDadosEscritorio = async () => {
-            if (!userEmail) return;
-            try {
-                const encodedEmail = encodeURIComponent(userEmail);
-                const response = await axios.get(`http://localhost:3001/lex/escritorio/advogado/${encodedEmail}`)
-                if (response.data?.result?.length > 0) {
-                    const primeiroEscritorio = response.data.result[0];
-                    if (primeiroEscritorio?.nome_escritorio) {
+                const responseAdvogado = await axios.get(`http://localhost:3001/lex/advogado/email/${encodedEmail}`);
+                if (responseAdvogado.data?.result?.nome_adv) {
+                    setNomeAdvogado(responseAdvogado.data.result.nome_adv);
+                } else {
+                    console.error('Erro ao buscar o nome do advogado.');
+                }
+
+                const responseEscritorio = await axios.get(`http://localhost:3001/lex/escritorio/advogado/${encodedEmail}`);
+                if (responseEscritorio.data?.result?.length > 0) {
+                    const primeiroEscritorio = responseEscritorio.data.result[0];
+                    if (primeiroEscritorio?.nome_escritorio && primeiroEscritorio?.telefone_escritorio) {
                         setNomeEscritorio(primeiroEscritorio.nome_escritorio);
+
+                        const responseClientes = await axios.get(`http://localhost:3001/lex/cliente/escritorio/${primeiroEscritorio.telefone_escritorio}`);
+                        if (responseClientes.data?.result?.length > 0) {
+                            setClientes(responseClientes.data.result);
+
+                            const clienteEnvolvs = responseClientes.data.result.map(cliente => cliente.cpf);
+                            const processos = await Promise.all(clienteEnvolvs.map(cpf => {
+                                return axios.get(`http://localhost:3001/lex/processo/cliente/${cpf}`)
+                                    .then(response => response.data.result || []);
+                            }));
+                            setProcessos(processos.flat());
+                        } else {
+                            console.error('Erro ao buscar os clientes.');
+                        }
                     } else {
-                        console.error('Resposta da API não contém "nome_escritorio".');
+                        console.error('Erro ao buscar o nome ou telefone do escritório.');
                     }
                 } else {
-                    console.error('Resposta da API não contém resultados ou está vazia.');
+                    console.error('Erro ao buscar o escritório.');
                 }
             } catch (error) {
-                console.error('Erro ao buscar o nome do escritório:', error);
+                console.error('Erro ao buscar dados:', error);
             }
         };
 
-        const fetchDadosClientes = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/lex/clientes');
-                if (response.data?.result?.length > 0) {
-                    setClientes(response.data.result);
-                    
-                    const clienteEnvolvs = response.data.result.map(cliente => cliente.cpf);
-                    const processos = await Promise.all(clienteEnvolvs.map(cpf => {
-                        return axios.get(`http://localhost:3001/lex/processo/cliente/${cpf}`)
-                            .then(response => response.data.result || []);
-                    }));
-                    setProcessos(processos.flat());
-                } else {
-                    console.error('Resposta da API não contém dados válidos.');
-                }
-            } catch (error) {
-                console.error('Erro ao buscar os clientes:', error);
-            }
-        };
-
-        fetchDadosAdvogado();
-        fetchDadosEscritorio();
-        fetchDadosClientes();
+        fetchDados();
     }, [userEmail]);
 
     return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos };
