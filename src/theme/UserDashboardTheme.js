@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const TituloUser = styled.h1`
 font-size: 2rem;
-margin: 3rem 0 0 3rem;;
+margin: 3rem 0 0 3rem;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `
@@ -55,4 +55,18 @@ export const ListaClientesTxt = styled.p`
 font-size: 1rem;
 margin: 0;
 padding: 0;
+`
+export const ContainerTituloPerfilLogout = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+gap: 1rem;
+margin: 3rem 0 0 3rem;
+`
+export const ContainerPerfilLogout = styled.div`
+display: flex;
+margin-left: 2rem;
+flex-direction: row;
+align-items: center;
+gap: 2rem;
 `

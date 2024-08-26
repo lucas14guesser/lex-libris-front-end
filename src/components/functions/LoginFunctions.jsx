@@ -27,15 +27,16 @@ export default function LoginFunctions() {
             const { data } = response;
 
             if (data.success) {
+                sessionStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 setUserEmail(data.user.email_adv);
-
+            
                 if (data.user.role === 'admin') {
                     router.push('/adminDashboard');
                 } else {
                     router.push('/userDashboard');
                 }
-
+            
                 setEmail('');
                 setSenha('');
             } else {
