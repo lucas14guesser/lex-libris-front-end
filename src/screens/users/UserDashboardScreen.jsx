@@ -1,39 +1,54 @@
-import { Container, Titulo } from "@/theme/GlobalStyles";
-import {  ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard,  } from "@/theme/UserDashboardTheme";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useUser } from '../../context/UserContext';
 import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
+import { ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { Container, Titulo } from "@/theme/GlobalStyles";
+import ProtectedRoute from "@/components/ProtecaoRotas";
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, nomeEscritorio, clientes, processos } = userDashboardFunctions();
+    const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, error } = userDashboardFunctions();
+    const { logout, isAuthenticated } = useUser();
+    const router = useRouter();
+    const [hasRedirected, setHasRedirected] = useState(false);
     const processosEmAndamento = processos.filter(processo => processo.status_processo === 'em andamento');
     const processosEncerrados = processos.filter(processo => processo.status_processo === 'encerrado');
 
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (isAuthenticated && !hasRedirected) {
+            router.replace('/userDashboard');
+            setHasRedirected(true);
+        }
+    }, [isAuthenticated, loading, router, hasRedirected]);
+
+    if (loading) {
+        return <div>Redirecionando...</div>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
     return (
-        <React.Fragment>
-                <TituloUser>
-                    Bem-vindo, {nomeAdvogado}!
-                </TituloUser>
+        <ProtectedRoute publicRoutes={['/', '/login', '/cadastro']}>
+            <TituloUser>
+                Bem-vindo, {nomeAdvogado}!
+            </TituloUser>
             <Container>
                 <ContainerUserDashboard>
-                    {nomeEscritorio ? (
-                        <Titulo>
-                            Visão Geral - {nomeEscritorio}
-                        </Titulo>
-                    ) : (
-                        <Titulo>
-                            Visão Geral
-                        </Titulo>
-                    )}
-                    {nomeEscritorio ? (
-                        <></>
-                    ) : (
+                    <Titulo>
+                        Visão Geral {nomeEscritorio ? `- ${nomeEscritorio}` : ''}
+                    </Titulo>
+                    {!nomeEscritorio && (
                         <TxtUsuarioDashboard>
                             Você ainda não cadastrou um escritório. Por favor, complete seu cadastro para acessar todas as funcionalidades.
                         </TxtUsuarioDashboard>
                     )}
                     <ContainerProcessosAndEnc>
-                        <LinkProcessosAndEnc
-                            href="/processos/andamento">
+                        <LinkProcessosAndEnc href="/processos/andamento">
                             <TxtUsuarioDashboard>
                                 Processos em Andamento
                             </TxtUsuarioDashboard>
@@ -41,8 +56,7 @@ export default function UserDashboardScreen() {
                                 {processosEmAndamento.length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
-                        <LinkProcessosAndEnc
-                            href="/processos/encerrados">
+                        <LinkProcessosAndEnc href="/processos/encerrados">
                             <TxtUsuarioDashboard>
                                 Processos Encerrados
                             </TxtUsuarioDashboard>
@@ -56,8 +70,7 @@ export default function UserDashboardScreen() {
                     </TxtUsuarioDashboard>
                     <ListaClientes>
                         {clientes.map(cliente => (
-                            <ListaClientesLi
-                                key={cliente.cpf}>
+                            <ListaClientesLi key={cliente.cpf}>
                                 <ListaClientesTxt>
                                     Nome: {cliente.nome} - Telefone: {cliente.telefone}
                                 </ListaClientesTxt>
@@ -65,7 +78,11 @@ export default function UserDashboardScreen() {
                         ))}
                     </ListaClientes>
                 </ContainerUserDashboard>
+                <button onClick={logout}>
+                    Logout
+                </button>
             </Container>
-        </React.Fragment>
+        </ProtectedRoute>
     );
+    
 }

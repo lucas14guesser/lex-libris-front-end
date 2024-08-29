@@ -9,27 +9,27 @@ export default function LoginFunctions() {
     const [error, setError] = useState('');
 
     const router = useRouter();
-    const { setUserEmail } = useUser(); 
+    const { setUserEmail, setIsAuthenticated } = useUser(); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
+    
         try {
             if (!email || !senha) {
                 setError('É necessário preencher os campos para entrar');
                 return;
             }
-
+    
             const response = await axios.post('http://localhost:3001/lex/auth/login', {
                 email_adv: email,
                 senha_adv: senha
             }, { withCredentials: true });
-
+    
             const { data } = response;
-
+    
             if (data.success) {
-                localStorage.setItem('user', JSON.stringify(data.user));
                 setUserEmail(data.user.email_adv);
+                setIsAuthenticated(true);
 
                 if (data.user.role === 'admin') {
                     router.push('/adminDashboard');
@@ -43,7 +43,8 @@ export default function LoginFunctions() {
                 setError('Verifique suas credenciais.');
             }
         } catch (error) {
-            setError('Verifique suas credenciais ou tente novamente mais tarde.');
+            console.error('Login error:', error); 
+            setError('Erro ao realizar login. Verifique suas credenciais ou tente novamente mais tarde.');
         }
     };
 
