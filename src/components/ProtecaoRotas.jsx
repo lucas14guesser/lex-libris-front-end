@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
 
     useEffect(() => {
         const checkAuth = async () => {
-            const isPublicRoute = ['/', '/login', '/cadastro'].includes(router.pathname);
+            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao'].includes(router.pathname);
 
             if (isAuthenticated) {
                 if (router.pathname === '/login' || router.pathname === '/cadastro') {

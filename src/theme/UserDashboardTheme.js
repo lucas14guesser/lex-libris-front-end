@@ -70,3 +70,18 @@ flex-direction: row;
 align-items: center;
 gap: 2rem;
 `
+export const BotaoLogout = styled.button`
+border: none;
+border-bottom: 1px solid #000D20;
+padding: 0 1rem .2rem 1rem;
+margin: 3rem 0 0 3rem;
+background: #E6E6E6;
+cursor: pointer;
+font-size: 1rem;
+color: #000D20;
+font-family: "Roboto", sans-serif;
+        &:hover {
+        transition: 0.13s;
+        border-bottom: .13rem solid #000D20;
+    }
+`

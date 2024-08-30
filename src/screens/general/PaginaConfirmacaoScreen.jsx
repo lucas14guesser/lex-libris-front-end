@@ -20,8 +20,8 @@ export default function PaginaConfirmacaoScreen() {
                             Seu e-mail foi confirmado com sucesso!
                         </TxtPaginaConfirmacao>
                         <LinkRedirect
-                            href='/userDashboard'>
-                            Ir para seu usuario
+                            href='/login'>
+                            Ir para Login
                         </LinkRedirect>
                     </ContainerTxtLinkPaginaConfirmacao>
                 </ContainerFormulario>

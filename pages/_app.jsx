@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <UserProvider>
-        <ProtectedRoute publicRoutes={['/', '/login', '/cadastro']}>
+        <ProtectedRoute publicRoutes={['/', '/login', '/cadastro', '/esqueciMinhaSenha']}>
           <Component {...pageProps} />
         </ProtectedRoute>
       </UserProvider>

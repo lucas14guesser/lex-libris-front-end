@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
-import { ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import { Container, Titulo } from "@/theme/GlobalStyles";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 
@@ -37,6 +37,9 @@ export default function UserDashboardScreen() {
             <TituloUser>
                 Bem-vindo, {nomeAdvogado}!
             </TituloUser>
+            <BotaoLogout onClick={logout}>
+                Sair
+            </BotaoLogout>
             <Container>
                 <ContainerUserDashboard>
                     <Titulo>
@@ -78,11 +81,8 @@ export default function UserDashboardScreen() {
                         ))}
                     </ListaClientes>
                 </ContainerUserDashboard>
-                <button onClick={logout}>
-                    Logout
-                </button>
             </Container>
         </ProtectedRoute>
     );
-    
+
 }
