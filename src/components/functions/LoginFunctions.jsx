@@ -9,24 +9,24 @@ export default function LoginFunctions() {
     const [error, setError] = useState('');
 
     const router = useRouter();
-    const { setUserEmail, setIsAuthenticated } = useUser(); 
+    const { setUserEmail, setIsAuthenticated } = useUser();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-    
+
         try {
             if (!email || !senha) {
                 setError('É necessário preencher os campos para entrar');
                 return;
             }
-    
+
             const response = await axios.post('http://localhost:3001/lex/auth/login', {
                 email_adv: email,
                 senha_adv: senha
             }, { withCredentials: true });
-    
+
             const { data } = response;
-    
+
             if (data.success) {
                 setUserEmail(data.user.email_adv);
                 setIsAuthenticated(true);
@@ -43,8 +43,12 @@ export default function LoginFunctions() {
                 setError('Verifique suas credenciais.');
             }
         } catch (error) {
-            console.error('Login error:', error); 
-            setError('Erro ao realizar login. Verifique suas credenciais ou tente novamente mais tarde.');
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('Erro no Login. Verifique os dados e tente novamente.');
+            }
+            console.error('Erro no cadastro', error);
         }
     };
 

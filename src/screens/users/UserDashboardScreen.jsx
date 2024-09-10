@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
-import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesContainer, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import { Container, Titulo } from "@/theme/GlobalStyles";
 import ProtectedRoute from "@/components/ProtecaoRotas";
+import { FaGripLinesVertical } from "react-icons/fa";
 
 export default function UserDashboardScreen() {
     const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, error } = userDashboardFunctions();
@@ -74,9 +75,9 @@ export default function UserDashboardScreen() {
                     <ListaClientes>
                         {clientes.map(cliente => (
                             <ListaClientesLi key={cliente.cpf}>
-                                <ListaClientesTxt>
-                                    Nome: {cliente.nome} - Telefone: {cliente.telefone}
-                                </ListaClientesTxt>
+                                    <ListaClientesTxt>Nome: {cliente.nome}</ListaClientesTxt>
+                                    <ListaClientesTxt><FaGripLinesVertical /></ListaClientesTxt>
+                                    <ListaClientesTxt>Telefone: {cliente.telefone}</ListaClientesTxt>
                             </ListaClientesLi>
                         ))}
                     </ListaClientes>

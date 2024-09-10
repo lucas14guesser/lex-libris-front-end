@@ -1,4 +1,7 @@
 import useUserDashboard from "@/components/functions/UserDashboardFunctions";
+import { Container, Titulo } from "@/theme/GlobalStyles";
+import { DescricaoTxt, EditIcone, ListaProcessos, ListaProcessosLi, ListaProcessosTxt } from "@/theme/UserDashboardTheme";
+import { FaExpandArrowsAlt, FaGripLinesVertical } from "react-icons/fa";
 
 export default function ProcessosEncerrados() {
     const { clientes, processos } = useUserDashboard();
@@ -7,20 +10,21 @@ export default function ProcessosEncerrados() {
     const clientesMap = new Map(clientes.map(cliente => [cliente.cpf, { nome: cliente.nome, telefone: cliente.telefone }]));
 
     return (
-        <div>
-            <h2>Processos Encerrados</h2>
+        <Container>
+            <Titulo>Processos Encerrados</Titulo>
             {processosEncerrados.length > 0 ? (
-                <ul>
+                <ListaProcessos>
                     {processosEncerrados.map(processo => {
                         const cliente = clientesMap.get(processo.cliente_envolv);
                         return (
                             <>
-                                <li>
-                                    <p><strong>Cliente envolvido no processo:</strong></p>
-                                    <p>Nome: {cliente ? cliente.nome : 'Nome não encontrado'}</p>
-                                    <p>CPF: {processo.cliente_envolv}</p>
-                                    <p>Telefone: {cliente ? cliente.telefone : 'Telefone não encontrado'}</p>
-                                </li>
+                                <ListaProcessosLi key={processo.cod_processo}>
+                                    <ListaProcessosTxt>Nome: {cliente ? cliente.nome : 'Nome não encontrado'}</ListaProcessosTxt>
+                                    <ListaProcessosTxt><FaGripLinesVertical /></ListaProcessosTxt>
+                                    <DescricaoTxt>{processo.descricao_processo}</DescricaoTxt>
+                                    <EditIcone href="/processos/encerrados"><FaExpandArrowsAlt /></EditIcone>
+                                </ListaProcessosLi>
+                                {/*
                                 <li key={processo.cod_processo}>
                                     <p><strong>Processo relacionado:</strong></p>
                                     <p>Código do Processo: {processo.cod_processo}</p>
@@ -30,13 +34,14 @@ export default function ProcessosEncerrados() {
                                     <p>Status: {processo.status_processo}</p>
                                     <p>Data de Início: {processo.data_inicio}</p>
                                 </li>
+                                */}
                             </>
                         )
                     })}
-                </ul>
+                </ListaProcessos>
             ) : (
                 <p>Nenhum processo em andamento encontrado.</p>
             )}
-        </div>
+        </Container>
     );
 }

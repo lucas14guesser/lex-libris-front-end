@@ -47,6 +47,10 @@ width: 654px;
 margin: 0;
 `
 export const ListaClientesLi = styled.li`
+display: flex;
+flex-direction: row;
+justify-content: center;
+gap: 1rem;
 padding: 1rem 0;
 margin-right: 2.5rem;
 border-bottom: 1px solid #E6E6E6;
@@ -84,4 +88,38 @@ font-family: "Roboto", sans-serif;
         transition: 0.13s;
         border-bottom: .13rem solid #000D20;
     }
+`
+export const ListaProcessos = styled.ol`
+display: flex;
+flex-direction: column;
+justify-content: center;
+background: #FFFFFF;
+border: 1px solid #000D20;
+border-radius: 12px;
+width: 654px;
+margin: 0;
+`
+export const ListaProcessosLi = styled.li`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+border-bottom: 1px solid #E6E6E6;
+gap: 3rem;
+`
+export const ListaProcessosTxt = styled.p`
+font-size: 1rem;
+`
+export const DescricaoTxt = styled(ListaProcessosTxt)`
+text-align: center;
+flex-basis: 35%;
+text-align: left;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+`;
+export const EditIcone = styled(Link)`
+text-decoration: none;
+font-size: 1rem;
+color: #000D20;
 `
