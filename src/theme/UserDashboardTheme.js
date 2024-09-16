@@ -7,6 +7,41 @@ margin: 3rem 0 0 3rem;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `
+export const ContainerInputBtnBuscaProcesso = styled.div`
+display: flex;
+flex-direction: row;
+margin: 3rem 0 2rem 0;
+`
+export const InputBuscaProcesso = styled.input`
+width: 20rem;
+padding: .7rem;
+border: 1px solid #000D20;
+border-right: none;
+border-radius: 12px 0 0 12px;
+margin: 0;
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        font-size: 1rem;
+        color: #000D20;
+    }
+`
+export const BtnBuscaProcesso = styled.button`
+background: #FFFFFF;
+color: #000D20;
+padding: .7rem;
+border: 1px solid #000D20;
+border-left: none;
+border-radius: 0 12px 12px 0;
+cursor: pointer;
+font-size: 1.1rem;
+    &:hover {
+        transition: 0.3s;
+        background: #000D20;
+        color: #FFFFFF;
+    }
+`
 export const ContainerUserDashboard = styled.div`
 display: flex;
 flex-direction: column;
@@ -96,7 +131,7 @@ justify-content: center;
 background: #FFFFFF;
 border: 1px solid #000D20;
 border-radius: 12px;
-width: 654px;
+width: 954px;
 margin: 0;
 `
 export const ListaProcessosLi = styled.li`
@@ -104,6 +139,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
+margin-right: 2.5rem;
 border-bottom: 1px solid #E6E6E6;
 gap: 3rem;
 `
@@ -117,9 +153,31 @@ text-align: left;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
-`;
-export const EditIcone = styled(Link)`
-text-decoration: none;
+`
+export const BotoesListaProcesso = styled.div`
+display: flex;
+flex-direction: row;
+gap: .5rem;
+margin: 0;
+`
+export const BotaoEditIcone = styled.button`
+display: flex;
+flex-direction: row;
+justify-content: center;
+gap: .5rem;
 font-size: 1rem;
+background: #FFFFFF;
+border-radius: 8px;
 color: #000D20;
+padding: .3rem;
+text-transform: uppercase;
+font-family: "Roboto", sans-serif;
+border: 1px solid #000D20;
+cursor: pointer;
+width: 6.6rem;
+    &:hover {
+        transition: 0.3s;
+        background: #000D20;
+        color: #FFFFFF;
+    }
 `

@@ -5,7 +5,6 @@ import userDashboardFunctions from "../../components/functions/UserDashboardFunc
 import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesContainer, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import { Container, Titulo } from "@/theme/GlobalStyles";
 import ProtectedRoute from "@/components/ProtecaoRotas";
-import { FaGripLinesVertical } from "react-icons/fa";
 
 export default function UserDashboardScreen() {
     const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, error } = userDashboardFunctions();
@@ -76,7 +75,6 @@ export default function UserDashboardScreen() {
                         {clientes.map(cliente => (
                             <ListaClientesLi key={cliente.cpf}>
                                     <ListaClientesTxt>Nome: {cliente.nome}</ListaClientesTxt>
-                                    <ListaClientesTxt><FaGripLinesVertical /></ListaClientesTxt>
                                     <ListaClientesTxt>Telefone: {cliente.telefone}</ListaClientesTxt>
                             </ListaClientesLi>
                         ))}

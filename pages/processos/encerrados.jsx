@@ -1,7 +1,7 @@
 import useUserDashboard from "@/components/functions/UserDashboardFunctions";
 import { Container, Titulo } from "@/theme/GlobalStyles";
-import { DescricaoTxt, EditIcone, ListaProcessos, ListaProcessosLi, ListaProcessosTxt } from "@/theme/UserDashboardTheme";
-import { FaExpandArrowsAlt, FaGripLinesVertical } from "react-icons/fa";
+import { BotaoEditIcone, BotoesListaProcesso, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, DescricaoTxt, InputBuscaProcesso, ListaProcessos, ListaProcessosLi, ListaProcessosTxt } from "@/theme/UserDashboardTheme";
+import { FaSearch, FaExpandArrowsAlt } from "react-icons/fa";
 
 export default function ProcessosEncerrados() {
     const { clientes, processos } = useUserDashboard();
@@ -12,6 +12,12 @@ export default function ProcessosEncerrados() {
     return (
         <Container>
             <Titulo>Processos Encerrados</Titulo>
+            <ContainerInputBtnBuscaProcesso>
+                <InputBuscaProcesso type="text" name="buscaProcesso" id="buscaProcesso" placeholder="Cliente ou processo que deseja buscar..." />
+                <BtnBuscaProcesso>
+                    <FaSearch />
+                </BtnBuscaProcesso>
+            </ContainerInputBtnBuscaProcesso>
             {processosEncerrados.length > 0 ? (
                 <ListaProcessos>
                     {processosEncerrados.map(processo => {
@@ -19,10 +25,14 @@ export default function ProcessosEncerrados() {
                         return (
                             <>
                                 <ListaProcessosLi key={processo.cod_processo}>
-                                    <ListaProcessosTxt>Nome: {cliente ? cliente.nome : 'Nome não encontrado'}</ListaProcessosTxt>
-                                    <ListaProcessosTxt><FaGripLinesVertical /></ListaProcessosTxt>
-                                    <DescricaoTxt>{processo.descricao_processo}</DescricaoTxt>
-                                    <EditIcone href="/processos/encerrados"><FaExpandArrowsAlt /></EditIcone>
+                                    <ListaProcessosTxt>Cliente: {cliente ? cliente.nome : 'Nome não encontrado'}</ListaProcessosTxt>
+                                    <DescricaoTxt>Processo: {processo.descricao_processo}</DescricaoTxt>
+                                    <BotoesListaProcesso>
+                                        <BotaoEditIcone>
+                                            Expandir
+                                            <FaExpandArrowsAlt />
+                                        </BotaoEditIcone>
+                                    </BotoesListaProcesso>
                                 </ListaProcessosLi>
                                 {/*
                                 <li key={processo.cod_processo}>
