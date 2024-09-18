@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
-import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, ListaClientesContainer, ListaClientesLi, ListaClientesTxt, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import { Container, Titulo } from "@/theme/GlobalStyles";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 
@@ -72,12 +72,22 @@ export default function UserDashboardScreen() {
                         Lista de Clientes
                     </TxtUsuarioDashboard>
                     <ListaClientes>
-                        {clientes.map(cliente => (
-                            <ListaClientesLi key={cliente.cpf}>
-                                    <ListaClientesTxt>Nome: {cliente.nome}</ListaClientesTxt>
-                                    <ListaClientesTxt>Telefone: {cliente.telefone}</ListaClientesTxt>
-                            </ListaClientesLi>
-                        ))}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {clientes.map(cliente => (
+                                    <tr key={cliente.cpf}>
+                                        <td>{cliente.nome}</td>
+                                        <td>{cliente.telefone}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </ListaClientes>
                 </ContainerUserDashboard>
             </Container>

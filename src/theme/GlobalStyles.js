@@ -25,6 +25,9 @@ font-size: 1.5rem;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `
+export const FontBold = styled.strong`
+font-weight: 700;
+`
 export const Container = styled.div`
 display: flex;
 flex-direction: column;

@@ -74,26 +74,77 @@ export const LinkProcessosAndEnc = styled(Link)`
 export const TxtUsuarioDashboard = styled.p`
 font-size: 1.3rem;
 `
-export const ListaClientes = styled.ol`
-background: #FFFFFF;
-border: 1px solid #000D20;
-border-radius: 12px;
-width: 654px;
-margin: 0;
+export const ListaClientes = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 654px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #FFFFFF;
+    color: #000D20;
+  }
+
+  thead {
+    background-color: #000D20;
+    color: #FFFFFF;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #000D20;
+  }
+
+  th {
+    text-transform: uppercase;
+  }
+
+  td {
+    color: #000D20;
+  }
 `
-export const ListaClientesLi = styled.li`
+export const ListaProcessos = styled.div`
 display: flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
-gap: 1rem;
-padding: 1rem 0;
-margin-right: 2.5rem;
-border-bottom: 1px solid #E6E6E6;
+width: 1154px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    color: #000D20;
+  }
+
+  thead {
+    background-color: #000D20;
+    color: #FFFFFF;
+  }
+  th {
+    text-transform: uppercase;
+    padding: 12px 15px;
+    border: 1px solid #000D20;
+  }
+
 `
-export const ListaClientesTxt = styled.p`
-font-size: 1rem;
-margin: 0;
-padding: 0;
+export const TdListaProcessos = styled.td`
+padding: 12px 15px;
+border: 1px solid #000D20;
+color: #000D20;
+text-align: center;
+`
+export const DescricaoTd = styled(TdListaProcessos)`
+width: 50%;
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+`
+export const FuncoesListaProcessos = styled(TdListaProcessos)`
+width: 20%;
+max-width: 300px;
 `
 export const ContainerTituloPerfilLogout = styled.div`
 display: flex;
@@ -124,36 +175,6 @@ font-family: "Roboto", sans-serif;
         border-bottom: .13rem solid #000D20;
     }
 `
-export const ListaProcessos = styled.ol`
-display: flex;
-flex-direction: column;
-justify-content: center;
-background: #FFFFFF;
-border: 1px solid #000D20;
-border-radius: 12px;
-width: 954px;
-margin: 0;
-`
-export const ListaProcessosLi = styled.li`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-margin-right: 2.5rem;
-border-bottom: 1px solid #E6E6E6;
-gap: 3rem;
-`
-export const ListaProcessosTxt = styled.p`
-font-size: 1rem;
-`
-export const DescricaoTxt = styled(ListaProcessosTxt)`
-text-align: center;
-flex-basis: 35%;
-text-align: left;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-`
 export const BotoesListaProcesso = styled.div`
 display: flex;
 flex-direction: row;
@@ -174,10 +195,29 @@ text-transform: uppercase;
 font-family: "Roboto", sans-serif;
 border: 1px solid #000D20;
 cursor: pointer;
-width: 6.6rem;
+width: 7rem;
     &:hover {
         transition: 0.3s;
         background: #000D20;
         color: #FFFFFF;
     }
+`
+export const ModalOverlay = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+`
+export const ModalContent = styled.div`
+background-color: #FFFFFF;
+padding: 20px;
+border-radius: 10px;
+max-width: 500px;
+width: 100%;
+color: #000D20;
 `
