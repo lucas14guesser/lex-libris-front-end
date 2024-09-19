@@ -11,6 +11,94 @@ export default function useUserDashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [editField, setEditField] = useState(null);
+    const [modalEditOpen, setModalEditOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedProcess, setSelectedProcess] = useState(null);
+
+    const [numeroProcesso, setNumeroProcesso] = useState('');
+    const [areaProcesso, setAreaProcesso] = useState('');
+    const [statusProcesso, setStatusProcesso] = useState('');
+
+    const handleClickReabrir = (processo) => {
+        const updatedStatus = {
+            ...processo,
+            status_processo: 'em andamento',
+        };
+    
+        setSelectedProcess(updatedStatus);
+    
+        axios.put(`http://localhost:3001/lex/processo/${processo.cod_processo}`, updatedStatus)
+            .then(response => {
+                console.log('Status do processo atualizado com sucesso!', response);
+    
+                setProcessos(prevProcessos =>
+                    prevProcessos.map(p =>
+                        p.cod_processo === updatedStatus.cod_processo ? updatedStatus : p
+                    )
+                );
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o status do processo', error);
+            });
+    };
+
+    const handleClickEditarWindow = (processo) => {
+        setSelectedProcess(processo);
+        setNumeroProcesso(processo.numero_processo || '');
+        setAreaProcesso(processo.area_processo || '');
+        setStatusProcesso(processo.status_processo || '');
+        setModalEditOpen(true);
+    }
+
+    const handleClickEditar = (field) => {
+        setEditField(field);
+    }
+
+    const handleChangeField = (setter) => (e) => {
+        setter(e.target.value);
+    };
+
+    const handleSaveEditClick = () => {
+        setEditField(null);
+        const updatedProcess = {
+            ...selectedProcess,
+            numero_processo: numeroProcesso,
+            area_processo: areaProcesso,
+            status_processo: statusProcesso,
+        };
+        setSelectedProcess(updatedProcess);
+
+        axios.put(`http://localhost:3001/lex/processo/${selectedProcess.cod_processo}`, updatedProcess)
+            .then(response => {
+                console.log('Processo atualizado com sucesso!', response);
+
+                setProcessos(prevProcessos =>
+                    prevProcessos.map(processo =>
+                        processo.cod_processo === updatedProcess.cod_processo ? updatedProcess : processo
+                    )
+                );
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o processo', error);
+            });
+    };
+
+    const handleCloseModalEdit = () => {
+        setModalEditOpen(false);
+        setSelectedProcess(null);
+    }
+
+    const handleClickConsultar = (processo) => {
+        setSelectedProcess(processo);
+        setModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setSelectedProcess(null);
+    }
+
     useEffect(() => {
         const fetchDados = async () => {
             if (!userEmail) return;
@@ -69,5 +157,5 @@ export default function useUserDashboard() {
         fetchDados();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos, loading, setLoading, error };
+    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir };
 }

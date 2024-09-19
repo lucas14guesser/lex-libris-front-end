@@ -203,15 +203,15 @@ width: 7rem;
     }
 `
 export const ModalOverlay = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
 background: rgba(0, 0, 0, 0.5);
-display: flex;
-justify-content: center;
-align-items: center;
 `
 export const ModalContent = styled.div`
 background-color: #FFFFFF;
@@ -219,5 +219,40 @@ padding: 20px;
 border-radius: 10px;
 max-width: 500px;
 width: 100%;
+color: #000D20;
+`
+export const ModalInternalContainer = styled.div`
+  text-align: start;
+`
+export const ButtonEdit = styled.button`
+background: #000D20;
+color: #FFFFFF;
+font-size: 1rem;
+width: 2.5rem;
+margin-left: 1rem;
+border: 1px solid #000D20;
+border-radius: 8px;
+cursor: pointer;
+  &:hover{
+    transition: 0.3s;
+    background: #FFFFFF;
+    color: #000D20;
+  }
+`
+export const SelectStatus = styled.select`
+background-color: #FFFFFF;
+color: #000D20;
+border: 1px solid #000D20;
+border-radius: 8px;
+font-size: 1rem;
+cursor: pointer;
+  &:focus{
+    outline: none;
+    border-color: #000D20;
+    background-color: #FFFFFF;
+  }
+`
+export const OptionStatus = styled.option`
+background-color: #FFFFFF;
 color: #000D20;
 `
