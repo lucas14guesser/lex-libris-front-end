@@ -10,7 +10,7 @@ font-family: "Roboto", sans-serif;
 export const ContainerInputBtnBuscaProcesso = styled.div`
 display: flex;
 flex-direction: row;
-margin: 3rem 0 2rem 0;
+margin-bottom: 2rem;
 `
 export const InputBuscaProcesso = styled.input`
 width: 20rem;

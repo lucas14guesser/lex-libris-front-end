@@ -2,17 +2,29 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
-import { BotaoLogout, ContainerProcessosAndEnc, ContainerUserDashboard, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import { Container, Titulo } from "@/theme/GlobalStyles";
 import ProtectedRoute from "@/components/ProtecaoRotas";
+import { FaSearch } from "react-icons/fa";
 
 export default function UserDashboardScreen() {
     const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, error } = userDashboardFunctions();
     const { logout, isAuthenticated } = useUser();
     const router = useRouter();
     const [hasRedirected, setHasRedirected] = useState(false);
-    const processosEmAndamento = processos.filter(processo => processo.status_processo === 'em andamento');
-    const processosEncerrados = processos.filter(processo => processo.status_processo === 'encerrado');
+    const [busca, setBusca] = useState('');
+    const [clientesFiltrados, setClientesFiltrados] = useState(clientes);
+
+    const buscarClientes = () => {
+        if (busca.trim() === '') {
+            setClientesFiltrados(clientes);
+        } else {
+            const resultados = clientes.filter(cliente => 
+                cliente.nome.toLowerCase().includes(busca.toLowerCase())
+            );
+            setClientesFiltrados(resultados);
+        }
+    };
 
     useEffect(() => {
         if (loading) {
@@ -23,6 +35,10 @@ export default function UserDashboardScreen() {
             setHasRedirected(true);
         }
     }, [isAuthenticated, loading, router, hasRedirected]);
+
+    useEffect(() => {
+        setClientesFiltrados(clientes);
+    }, [clientes]);
 
     if (loading) {
         return <div>Redirecionando...</div>;
@@ -56,7 +72,7 @@ export default function UserDashboardScreen() {
                                 Processos em Andamento
                             </TxtUsuarioDashboard>
                             <TxtUsuarioDashboard>
-                                {processosEmAndamento.length}
+                                {processos.filter(processo => processo.status_processo === 'em andamento').length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
                         <LinkProcessosAndEnc href="/processos/encerrados">
@@ -64,13 +80,26 @@ export default function UserDashboardScreen() {
                                 Processos Encerrados
                             </TxtUsuarioDashboard>
                             <TxtUsuarioDashboard>
-                                {processosEncerrados.length}
+                                {processos.filter(processo => processo.status_processo === 'encerrado').length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
                     </ContainerProcessosAndEnc>
                     <TxtUsuarioDashboard>
                         Lista de Clientes
                     </TxtUsuarioDashboard>
+                    <ContainerInputBtnBuscaProcesso>
+                        <InputBuscaProcesso
+                            type="text"
+                            name="buscaCliente"
+                            id="buscaCliente"
+                            placeholder="Nome do cliente que deseja buscar..."
+                            value={busca}
+                            onChange={(e) => setBusca(e.target.value)}
+                        />
+                        <BtnBuscaProcesso onClick={buscarClientes}>
+                            <FaSearch />
+                        </BtnBuscaProcesso>
+                    </ContainerInputBtnBuscaProcesso>
                     <ListaClientes>
                         <table>
                             <thead>
@@ -80,7 +109,7 @@ export default function UserDashboardScreen() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {clientes.map(cliente => (
+                                {clientesFiltrados.map(cliente => (
                                     <tr key={cliente.cpf}>
                                         <td>{cliente.nome}</td>
                                         <td>{cliente.telefone}</td>
@@ -93,5 +122,4 @@ export default function UserDashboardScreen() {
             </Container>
         </ProtectedRoute>
     );
-
 }

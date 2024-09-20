@@ -10,16 +10,40 @@ export default function ProcessosEncerrados() {
     const processosEncerrados = processos.filter(processo => processo.status_processo.toLowerCase() === 'encerrado');
     const clientesMap = new Map(clientes.map(cliente => [cliente.cpf, { nome: cliente.nome, telefone: cliente.telefone }]));
 
+    const [busca, setBusca] = useState('');
+    const [resultadosBusca, setResultadosBusca] = useState(null);
+
+    const buscarProcessosPorCliente = () => {
+        if (busca.trim() === '') {
+            setResultadosBusca(null);
+        } else {
+            const resultados = processosEncerrados.filter(processo => {
+                const cliente = clientesMap.get(processo.cliente_envolv);
+                return cliente && cliente.nome.toLowerCase().includes(busca.toLowerCase());
+            });
+            setResultadosBusca(resultados);
+        }
+    };
+
+    const processosExibidos = resultadosBusca !== null ? resultadosBusca : processosEncerrados;
+
     return (
         <Container>
             <Titulo>Processos Encerrados</Titulo>
             <ContainerInputBtnBuscaProcesso>
-                <InputBuscaProcesso type="text" name="buscaProcesso" id="buscaProcesso" placeholder="Cliente ou processo que deseja buscar..." />
-                <BtnBuscaProcesso>
+                <InputBuscaProcesso
+                    type="text"
+                    name="buscaProcesso"
+                    id="buscaProcesso"
+                    placeholder="Nome do cliente que deseja buscar..."
+                    value={busca}
+                    onChange={(e) => setBusca(e.target.value)}
+                />
+                <BtnBuscaProcesso onClick={buscarProcessosPorCliente}>
                     <FaSearch />
                 </BtnBuscaProcesso>
             </ContainerInputBtnBuscaProcesso>
-            {processosEncerrados.length > 0 ? (
+            {processosExibidos.length > 0 ? (
                 <ListaProcessos>
                     <table>
                         <thead>
@@ -30,7 +54,7 @@ export default function ProcessosEncerrados() {
                             </tr>
                         </thead>
                         <tbody>
-                            {processosEncerrados.map(processo => {
+                            {processosExibidos.map(processo => {
                                 const cliente = clientesMap.get(processo.cliente_envolv);
                                 return (
                                     <tr key={processo.cod_processo}>
@@ -38,7 +62,7 @@ export default function ProcessosEncerrados() {
                                         <DescricaoTd>{processo.descricao_processo}</DescricaoTd>
                                         <FuncoesListaProcessos>
                                             <BotoesListaProcesso>
-                                            <BotaoEditIcone onClick={() => handleClickReabrir(processo)}>
+                                                <BotaoEditIcone onClick={() => handleClickReabrir(processo)}>
                                                     Reabrir
                                                 </BotaoEditIcone>
                                                 <BotaoEditIcone onClick={() => handleClickConsultar(processo)}>

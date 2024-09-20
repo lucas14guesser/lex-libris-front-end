@@ -2,23 +2,48 @@ import useUserDashboard from "@/components/functions/UserDashboardFunctions";
 import Modal from "@/components/processos/ModalProcesso";
 import { Container, FontBold, Subtitulo, Titulo } from "@/theme/GlobalStyles";
 import { BotaoEditIcone, BotoesListaProcesso, BtnBuscaProcesso, ButtonEdit, ContainerInputBtnBuscaProcesso, DescricaoTd, FuncoesListaProcessos, InputBuscaProcesso, ListaProcessos, ModalInternalContainer, OptionStatus, SelectStatus, TdListaProcessos } from "@/theme/UserDashboardTheme";
+import { useState } from "react";
 import { FaSearch, FaEdit } from "react-icons/fa";
 
 export default function ProcessosEmAndamento() {
     const { clientes, processos, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso } = useUserDashboard();
     const processosEmAndamento = processos.filter(processo => processo.status_processo.toLowerCase() === 'em andamento');
     const clientesMap = new Map(clientes.map(cliente => [cliente.cpf, { nome: cliente.nome, telefone: cliente.telefone }]));
+    const [busca, setBusca] = useState('');
+    const [resultadosBusca, setResultadosBusca] = useState(null); 
+
+    const buscarProcessosPorCliente = () => {
+        if (busca.trim() === '') {
+            setResultadosBusca(null);
+        } else {
+            const resultados = processosEmAndamento.filter(processo => {
+                const cliente = clientesMap.get(processo.cliente_envolv);
+                return cliente && cliente.nome.toLowerCase().includes(busca.toLowerCase());
+            });
+            setResultadosBusca(resultados);
+        }
+    };
+
+    const processosExibidos = resultadosBusca !== null ? resultadosBusca : processosEmAndamento;
 
     return (
         <Container>
             <Titulo>Processos em Andamento</Titulo>
             <ContainerInputBtnBuscaProcesso>
-                <InputBuscaProcesso type="text" name="buscaProcesso" id="buscaProcesso" placeholder="Cliente ou processo que deseja buscar..." />
-                <BtnBuscaProcesso>
+                <InputBuscaProcesso
+                    type="text"
+                    name="buscaProcesso"
+                    id="buscaProcesso"
+                    placeholder="Nome do cliente que deseja buscar..."
+                    value={busca}
+                    onChange={(e) => setBusca(e.target.value)}
+                />
+                <BtnBuscaProcesso onClick={buscarProcessosPorCliente}>
                     <FaSearch />
                 </BtnBuscaProcesso>
             </ContainerInputBtnBuscaProcesso>
-            {processosEmAndamento.length > 0 ? (
+
+            {processosExibidos.length > 0 ? (
                 <ListaProcessos>
                     <table>
                         <thead>
@@ -29,7 +54,7 @@ export default function ProcessosEmAndamento() {
                             </tr>
                         </thead>
                         <tbody>
-                            {processosEmAndamento.map(processo => {
+                            {processosExibidos.map(processo => {
                                 const cliente = clientesMap.get(processo.cliente_envolv);
                                 return (
                                     <tr key={processo.cod_processo}>
