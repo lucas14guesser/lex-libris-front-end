@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
-import userDashboardFunctions from "../../components/functions/UserDashboardFunctions";
-import { BotaoLogout, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
-import { Container, Titulo } from "@/theme/GlobalStyles";
+import useUserDashboard from "../../components/functions/UserDashboardFunctions";
+import CadastroFunction from '@/components/functions/CadastroFunctions';
+import { BotaoLogout, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 import { FaSearch } from "react-icons/fa";
+import ModalCadEscri from "@/components/functions/ModalCadEscri";
+import { RiPhoneLine, RiUser3Line } from "react-icons/ri";
+import { HiOutlineBuildingOffice } from "react-icons/hi2";
+import { BotaoSubmit, CamposInput, Container, ContainerLabelInput, Formulario, StyledError, TextoLabel, Titulo, Subtitulo, StyledSuccess } from '@/theme/GlobalStyles'
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, error } = userDashboardFunctions();
+    const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, } = useUserDashboard();
+    const { telefoneEscritorio, setTelefoneEscritorio, nomeEscritorioCreate, setNomeEscritorioCreate, advogadoResp, setAdvogadoResp, handleCadastroEscritorio, error, success } = CadastroFunction();
+    const { userEmail } = useUser()
     const { logout, isAuthenticated } = useUser();
     const router = useRouter();
     const [hasRedirected, setHasRedirected] = useState(false);
@@ -19,7 +25,7 @@ export default function UserDashboardScreen() {
         if (busca.trim() === '') {
             setClientesFiltrados(clientes);
         } else {
-            const resultados = clientes.filter(cliente => 
+            const resultados = clientes.filter(cliente =>
                 cliente.nome.toLowerCase().includes(busca.toLowerCase())
             );
             setClientesFiltrados(resultados);
@@ -34,6 +40,10 @@ export default function UserDashboardScreen() {
             router.replace('/userDashboard');
             setHasRedirected(true);
         }
+        if (userEmail) {
+            setAdvogadoResp(userEmail)
+        }
+
     }, [isAuthenticated, loading, router, hasRedirected]);
 
     useEffect(() => {
@@ -53,7 +63,7 @@ export default function UserDashboardScreen() {
             <TituloUser>
                 Bem-vindo, {nomeAdvogado}!
             </TituloUser>
-            <BotaoLogout onClick={logout}>
+            <BotaoLogout onClick={logout} style={{ margin: '3rem 0 0 3rem' }}>
                 Sair
             </BotaoLogout>
             <Container>
@@ -62,9 +72,14 @@ export default function UserDashboardScreen() {
                         Visão Geral {nomeEscritorio ? `- ${nomeEscritorio}` : ''}
                     </Titulo>
                     {!nomeEscritorio && (
-                        <TxtUsuarioDashboard>
-                            Você ainda não cadastrou um escritório. Por favor, complete seu cadastro para acessar todas as funcionalidades.
-                        </TxtUsuarioDashboard>
+                        <ContainerTxtCadastroEscritorio>
+                            <TxtUsuarioDashboard>
+                                Você ainda não cadastrou um escritório. Por favor, cadastre seu escritório clicando no botão à baixo.
+                            </TxtUsuarioDashboard>
+                            <BotaoLogout onClick={handleClickModalCadEscri} style={{ marginBottom: '3rem' }}>
+                                Cadastrar Escritório
+                            </BotaoLogout>
+                        </ContainerTxtCadastroEscritorio>
                     )}
                     <ContainerProcessosAndEnc>
                         <LinkProcessosAndEnc href="/processos/andamento">
@@ -120,6 +135,75 @@ export default function UserDashboardScreen() {
                     </ListaClientes>
                 </ContainerUserDashboard>
             </Container>
+
+            {modalCadEscriOpen && (
+                <ModalCadEscri>
+                    <Formulario onSubmit={handleCadastroEscritorio}>
+                        <Subtitulo>Cadastrar Escritório</Subtitulo>
+                        <ContainerLabelInput>
+                            <TextoLabel htmlFor='advogado_resp'>
+                                <RiUser3Line />
+                            </TextoLabel>
+                            <CamposInput
+                                type='text'
+                                id='advogado_resp'
+                                placeholder="E-mail"
+                                value={advogadoResp}
+                                readOnly
+                            />
+                        </ContainerLabelInput>
+                        <ContainerLabelInput>
+                            <TextoLabel htmlFor='telefone_escritorio'>
+                                <RiPhoneLine />
+                            </TextoLabel>
+                            <CamposInput
+                                type='text'
+                                id='telefone_escritorio'
+                                placeholder="Numero do WhatsApp"
+                                value={telefoneEscritorio}
+                                onChange={(e) => setTelefoneEscritorio(e.target.value)}
+                            />
+                        </ContainerLabelInput>
+                        <ContainerLabelInput>
+                            <TextoLabel htmlFor='nome_escritorio'>
+                                <HiOutlineBuildingOffice />
+                            </TextoLabel>
+                            <CamposInput
+                                type='text'
+                                id='nome_escritorio'
+                                placeholder='Nome do escritório'
+                                value={nomeEscritorioCreate}
+                                onChange={(e) => setNomeEscritorioCreate(e.target.value)}
+                            />
+                        </ContainerLabelInput>
+                        {error && (
+                            <StyledError>
+                                {error.split('\n').map((line, index) => (
+                                    <React.Fragment
+                                        key={index}>
+                                        {line}
+                                        <br />
+                                    </React.Fragment>
+                                ))}
+                            </StyledError>
+                        )}
+                        {success && <StyledSuccess>
+                            {success}
+                        </StyledSuccess>}
+                        <ContainerInputBtnBuscaProcesso style={{ gap: '2rem' }}>
+                            <BotaoSubmit
+                                type="submit">
+                                Cadastrar
+                            </BotaoSubmit>
+                            <BotaoSubmit
+                                type="button"
+                                onClick={handleCloseModalCadEscri}>
+                                Fechar
+                            </BotaoSubmit>
+                        </ContainerInputBtnBuscaProcesso>
+                    </Formulario>
+                </ModalCadEscri>
+            )}
         </ProtectedRoute>
     );
 }

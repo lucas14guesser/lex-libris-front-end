@@ -1,4 +1,5 @@
 import useUserDashboard from "@/components/functions/UserDashboardFunctions";
+import ModalEdit from "@/components/processos/ModalEditProcesso";
 import Modal from "@/components/processos/ModalProcesso";
 import { Container, FontBold, Subtitulo, Titulo } from "@/theme/GlobalStyles";
 import { BotaoEditIcone, BotoesListaProcesso, BtnBuscaProcesso, ButtonEdit, ContainerInputBtnBuscaProcesso, DescricaoTd, FuncoesListaProcessos, InputBuscaProcesso, ListaProcessos, ModalInternalContainer, OptionStatus, SelectStatus, TdListaProcessos } from "@/theme/UserDashboardTheme";
@@ -95,7 +96,7 @@ export default function ProcessosEmAndamento() {
             )}
 
             {modalEditOpen && selectedProcess && (
-                <Modal onClose={handleCloseModalEdit}>
+                <ModalEdit onClose={handleCloseModalEdit}>
                     <h2>Detalhes do Processo</h2>
                     <ModalInternalContainer>
                         <p><strong>Código do Processo: </strong> {selectedProcess.cod_processo}</p>
@@ -157,7 +158,7 @@ export default function ProcessosEmAndamento() {
 
                         <p><strong>Data de Início: </strong> {selectedProcess.data_inicio}</p>
                     </ModalInternalContainer>
-                </Modal>
+                </ModalEdit>
             )}
         </Container>
     );

@@ -11,6 +11,7 @@ export default function useUserDashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [modalCadEscriOpen, setModalCadEscriOpen] = useState(false);
     const [editField, setEditField] = useState(null);
     const [modalEditOpen, setModalEditOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -42,6 +43,10 @@ export default function useUserDashboard() {
                 console.error('Erro ao atualizar o status do processo', error);
             });
     };
+
+    const handleClickModalCadEscri = () => {
+        setModalCadEscriOpen(true);
+    }
 
     const handleClickEditarWindow = (processo) => {
         setSelectedProcess(processo);
@@ -83,6 +88,10 @@ export default function useUserDashboard() {
                 console.error('Erro ao atualizar o processo', error);
             });
     };
+
+    const handleCloseModalCadEscri = () => {
+        setModalCadEscriOpen(false);
+    }
 
     const handleCloseModalEdit = () => {
         setModalEditOpen(false);
@@ -157,5 +166,5 @@ export default function useUserDashboard() {
         fetchDados();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir };
+    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri };
 }

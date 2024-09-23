@@ -8,7 +8,12 @@ export default function CadastroFunction() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
+    const [telefoneEscritorio, setTelefoneEscritorio] = useState('');
+    const [nomeEscritorioCreate, setNomeEscritorioCreate] = useState('');
+    const [advogadoResp, setAdvogadoResp] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
     const router = useRouter();
 
     const handleCadastro = async (e) => {
@@ -50,6 +55,41 @@ export default function CadastroFunction() {
         }
     };
 
+    const handleCadastroEscritorio = async (e) => {
+        e.preventDefault();
+    
+        if (!telefoneEscritorio || !nomeEscritorioCreate || !advogadoResp) {
+            setError('Todos os campos são obrigatórios');
+            return;
+        }
+    
+        try {
+            const telefoneCompleto = `+55${telefoneEscritorio}`;
+            console.log(`Enviando para o servidor: ${telefoneCompleto}`);
+    
+            const response = await axios.post('http://localhost:3001/lex/escritorio', {
+                advogado_resp: advogadoResp,
+                telefone_escritorio: telefoneCompleto,
+                nome_escritorio: nomeEscritorioCreate
+            });
+    
+            if (response.status === 200 || response.status === 201) {
+                setSuccess('Cadastro realizado com sucesso');
+                setTelefoneEscritorio('');
+                setNomeEscritorioCreate('');
+                setAdvogadoResp('');
+                setError('');
+            }
+        } catch (error) {
+            console.error('Erro no cadastro do escritório:', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('Erro no cadastro. Verifique os dados e tente novamente.');
+            }
+        }
+    };
+
     return {
         cpf,
         setCpf,
@@ -61,7 +101,15 @@ export default function CadastroFunction() {
         setNome,
         email,
         setEmail,
+        telefoneEscritorio,
+        setTelefoneEscritorio,
+        nomeEscritorioCreate,
+        setNomeEscritorioCreate,
+        advogadoResp,
+        setAdvogadoResp,
         error,
-        handleCadastro
+        success,
+        handleCadastro,
+        handleCadastroEscritorio
     };
 }
