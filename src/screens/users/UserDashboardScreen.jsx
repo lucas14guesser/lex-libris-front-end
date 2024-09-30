@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import useUserDashboard from "../../components/functions/UserDashboardFunctions";
 import CadastroFunction from '@/components/functions/CadastroFunctions';
-import { BotaoLogout, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 import { FaSearch } from "react-icons/fa";
 import ModalCadEscri from "@/components/functions/ModalCadEscri";
-import { RiPhoneLine, RiUser3Line } from "react-icons/ri";
+import { RiPhoneLine, RiUser3Line, RiMenuFill } from "react-icons/ri";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { BotaoSubmit, CamposInput, Container, ContainerLabelInput, Formulario, StyledError, TextoLabel, Titulo, Subtitulo, StyledSuccess } from '@/theme/GlobalStyles'
 
@@ -21,6 +21,8 @@ export default function UserDashboardScreen() {
     const [busca, setBusca] = useState('');
     const [clientesFiltrados, setClientesFiltrados] = useState(clientes);
 
+    const [submenuAbrir, setSubmenuAbrir] = useState(false);
+
     const buscarClientes = () => {
         if (busca.trim() === '') {
             setClientesFiltrados(clientes);
@@ -31,6 +33,10 @@ export default function UserDashboardScreen() {
             setClientesFiltrados(resultados);
         }
     };
+
+    const toggleSubmenu = () => {
+        setSubmenuAbrir(!submenuAbrir);
+    }
 
     useEffect(() => {
         if (loading) {
@@ -60,12 +66,22 @@ export default function UserDashboardScreen() {
 
     return (
         <ProtectedRoute publicRoutes={['/', '/login', '/cadastro']}>
-            <TituloUser>
-                Bem-vindo, {nomeAdvogado}!
+            <TituloUser onClick={toggleSubmenu}>
+                <RiMenuFill /> Bem-vindo, {nomeAdvogado}!
             </TituloUser>
-            <BotaoLogout onClick={logout} style={{ margin: '3rem 0 0 3rem' }}>
-                Sair
-            </BotaoLogout>
+            {submenuAbrir && (
+                <ContainerButtonsFunctions>
+                    <BotaoLogout>
+                        Meu perfil
+                    </BotaoLogout>
+                    <BotaoLogout>
+                        Configurar escritório
+                    </BotaoLogout>
+                    <BotaoLogout onClick={logout}>
+                        Sair
+                    </BotaoLogout>
+                </ContainerButtonsFunctions>
+            )}
             <Container>
                 <ContainerUserDashboard>
                     <Titulo>

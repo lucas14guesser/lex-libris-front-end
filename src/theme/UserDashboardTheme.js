@@ -2,8 +2,13 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const TituloUser = styled.h1`
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 1rem;
 font-size: 2rem;
 margin: 3rem 0 0 3rem;
+cursor: pointer;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `
@@ -166,17 +171,26 @@ flex-direction: row;
 align-items: center;
 gap: 2rem;
 `
+export const ContainerButtonsFunctions = styled.div`
+display: flex;
+flex-direction: column;
+margin: 1rem 0 0 6.25rem;
+width: 12%;
+background: #000D20;
+`
 export const BotaoLogout = styled.button`
 border: none;
-border-bottom: 1px solid #000D20;
-padding: 0 1rem .2rem 1rem;
-background: #E6E6E6;
+border: 1px solid #000D20;
+padding: .7rem;
+background: #000D20;
 cursor: pointer;
 font-size: 1rem;
-color: #000D20;
+color: #E6E6E6;
 font-family: "Roboto", sans-serif;
         &:hover {
         transition: 0.3s;
+        background: #FFFFFF;
+        color: #000D20;
     }
 `
 export const BotoesListaProcesso = styled.div`
