@@ -3,17 +3,18 @@ import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import useUserDashboard from "../../components/functions/UserDashboardFunctions";
 import CadastroFunction from '@/components/functions/CadastroFunctions';
-import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, ModalInternalContainer, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 import { FaSearch } from "react-icons/fa";
 import ModalCadEscri from "@/components/functions/ModalCadEscri";
 import { RiPhoneLine, RiUser3Line, RiMenuFill } from "react-icons/ri";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { BotaoSubmit, CamposInput, Container, ContainerLabelInput, Formulario, StyledError, TextoLabel, Titulo, Subtitulo, StyledSuccess } from '@/theme/GlobalStyles'
+import ModalUserProfile from "@/components/functions/ModalUserProfile";
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, nomeEscritorio, clientes, processos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, } = useUserDashboard();
-    const { telefoneEscritorio, setTelefoneEscritorio, nomeEscritorioCreate, setNomeEscritorioCreate, advogadoResp, setAdvogadoResp, handleCadastroEscritorio, error, success } = CadastroFunction();
+    const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
+    const { telefoneEscritorioCreate, setTelefoneEscritorioCreate, nomeEscritorioCreate, setNomeEscritorioCreate, advogadoResp, setAdvogadoResp, handleCadastroEscritorio, error, success } = CadastroFunction();
     const { userEmail } = useUser()
     const { logout, isAuthenticated } = useUser();
     const router = useRouter();
@@ -71,7 +72,7 @@ export default function UserDashboardScreen() {
             </TituloUser>
             {submenuAbrir && (
                 <ContainerButtonsFunctions>
-                    <BotaoLogout>
+                    <BotaoLogout onClick={handleClickModalUserProfile}>
                         Meu perfil
                     </BotaoLogout>
                     <BotaoLogout>
@@ -175,9 +176,9 @@ export default function UserDashboardScreen() {
                             <CamposInput
                                 type='text'
                                 id='telefone_escritorio'
-                                placeholder="Numero do WhatsApp"
-                                value={telefoneEscritorio}
-                                onChange={(e) => setTelefoneEscritorio(e.target.value)}
+                                placeholder="(DDD)Número do WhatsApp"
+                                value={telefoneEscritorioCreate}
+                                onChange={(e) => setTelefoneEscritorioCreate(e.target.value)}
                             />
                         </ContainerLabelInput>
                         <ContainerLabelInput>
@@ -219,6 +220,20 @@ export default function UserDashboardScreen() {
                         </ContainerInputBtnBuscaProcesso>
                     </Formulario>
                 </ModalCadEscri>
+            )}
+
+            {modalUserProfileOpen && (
+                <ModalUserProfile onClose={handleCloseModalUserProfile}>
+                    <Subtitulo style={{marginBottom: '2rem'}}>Minhas Informações</Subtitulo>
+                    <ModalInternalContainer>
+                        <p><strong>Nome completo:</strong> {nomeAdvogado}</p>
+                        <p><strong>E-mail:</strong> {advogadoResp}</p>
+                        <p><strong>Escritório:</strong> {nomeEscritorio}</p>
+                        <p><strong>Telefone:</strong> {telefoneEscritorio}</p>
+                        <p><strong>Clientes totais:</strong> {clientes.length}</p>
+                        <p><strong>Processos totais:</strong> {processos.length}</p>
+                    </ModalInternalContainer>
+                </ModalUserProfile>
             )}
         </ProtectedRoute>
     );

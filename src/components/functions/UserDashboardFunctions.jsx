@@ -10,12 +10,14 @@ export default function useUserDashboard() {
     const [processos, setProcessos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [telefoneEscritorio, setTelefoneEscritorio] = useState('');
 
     const [modalCadEscriOpen, setModalCadEscriOpen] = useState(false);
     const [editField, setEditField] = useState(null);
     const [modalEditOpen, setModalEditOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedProcess, setSelectedProcess] = useState(null);
+    const [modalUserProfileOpen, setModalUserProfileOpen] = useState(false);
 
     const [numeroProcesso, setNumeroProcesso] = useState('');
     const [areaProcesso, setAreaProcesso] = useState('');
@@ -26,13 +28,13 @@ export default function useUserDashboard() {
             ...processo,
             status_processo: 'em andamento',
         };
-    
+
         setSelectedProcess(updatedStatus);
-    
+
         axios.put(`http://localhost:3001/lex/processo/${processo.cod_processo}`, updatedStatus)
             .then(response => {
                 console.log('Status do processo atualizado com sucesso!', response);
-    
+
                 setProcessos(prevProcessos =>
                     prevProcessos.map(p =>
                         p.cod_processo === updatedStatus.cod_processo ? updatedStatus : p
@@ -43,6 +45,10 @@ export default function useUserDashboard() {
                 console.error('Erro ao atualizar o status do processo', error);
             });
     };
+
+    const handleClickModalUserProfile = () => {
+        setModalUserProfileOpen(true);
+    }
 
     const handleClickModalCadEscri = () => {
         setModalCadEscriOpen(true);
@@ -89,6 +95,10 @@ export default function useUserDashboard() {
             });
     };
 
+    const handleCloseModalUserProfile = () => {
+        setModalUserProfileOpen(false);
+    }
+
     const handleCloseModalCadEscri = () => {
         setModalCadEscriOpen(false);
     }
@@ -107,6 +117,19 @@ export default function useUserDashboard() {
         setModalOpen(false);
         setSelectedProcess(null);
     }
+
+    useEffect(() => {
+        const fetchDadosEscritorio = async () => {
+            try {
+                const resp = await axios.get(`http://localhost:3001/lex/escritorio/advogado/${userEmail}`)
+                setTelefoneEscritorio(resp.data.result[0].telefone_escritorio)
+
+            } catch {
+                console.error('Erro ao buscar dados do escritório');
+            }
+        };
+        fetchDadosEscritorio();
+    })
 
     useEffect(() => {
         const fetchDados = async () => {
@@ -166,5 +189,5 @@ export default function useUserDashboard() {
         fetchDados();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri };
+    return { nomeAdvogado, nomeEscritorio, userEmail, telefoneEscritorio, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile };
 }

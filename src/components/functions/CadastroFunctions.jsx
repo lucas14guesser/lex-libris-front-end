@@ -8,7 +8,7 @@ export default function CadastroFunction() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
-    const [telefoneEscritorio, setTelefoneEscritorio] = useState('');
+    const [telefoneEscritorioCreate, setTelefoneEscritorioCreate] = useState('');
     const [nomeEscritorioCreate, setNomeEscritorioCreate] = useState('');
     const [advogadoResp, setAdvogadoResp] = useState('');
     const [error, setError] = useState('');
@@ -58,13 +58,13 @@ export default function CadastroFunction() {
     const handleCadastroEscritorio = async (e) => {
         e.preventDefault();
     
-        if (!telefoneEscritorio || !nomeEscritorioCreate || !advogadoResp) {
+        if (!telefoneEscritorioCreate || !nomeEscritorioCreate || !advogadoResp) {
             setError('Todos os campos são obrigatórios');
             return;
         }
     
         try {
-            const telefoneCompleto = `+55${telefoneEscritorio}`;
+            const telefoneCompleto = `+55${telefoneEscritorioCreate}`;
             console.log(`Enviando para o servidor: ${telefoneCompleto}`);
     
             const response = await axios.post('http://localhost:3001/lex/escritorio', {
@@ -75,7 +75,7 @@ export default function CadastroFunction() {
     
             if (response.status === 200 || response.status === 201) {
                 setSuccess('Cadastro realizado com sucesso');
-                setTelefoneEscritorio('');
+                setTelefoneEscritorioCreate('');
                 setNomeEscritorioCreate('');
                 setAdvogadoResp('');
                 setError('');
@@ -101,8 +101,8 @@ export default function CadastroFunction() {
         setNome,
         email,
         setEmail,
-        telefoneEscritorio,
-        setTelefoneEscritorio,
+        telefoneEscritorioCreate,
+        setTelefoneEscritorioCreate,
         nomeEscritorioCreate,
         setNomeEscritorioCreate,
         advogadoResp,
