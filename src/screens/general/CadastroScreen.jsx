@@ -27,10 +27,6 @@ export default function CadastroScreen() {
             <Head>
                 <title>Lex Libris - Cadastro</title>
             </Head>
-            <Link
-                href="/">
-                Ir para a Home
-            </Link>
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo>

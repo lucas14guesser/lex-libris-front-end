@@ -6,9 +6,11 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
     const [userEmail, setUserEmail] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const checkAuth = async () => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('http://localhost:3001/lex/auth/check', { withCredentials: true });
                 if (response.data?.authenticated) {
@@ -22,6 +24,8 @@ export function UserProvider({ children }) {
             } catch (error) {
                 setUserEmail('');
                 setIsAuthenticated(false);
+            } finally {
+                setIsLoading(false);
             }
         };
         checkAuth();
@@ -44,7 +48,7 @@ export function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ userEmail, isAuthenticated, setIsAuthenticated, setUserEmail: updateUserEmail, logout }}>
+        <UserContext.Provider value={{ userEmail, isAuthenticated, isLoading, setIsAuthenticated, setUserEmail: updateUserEmail, logout }}>
             {children}
         </UserContext.Provider>
     );

@@ -3,13 +3,15 @@ import { useRouter } from 'next/router';
 import { useUser } from '../context/UserContext';
 
 const ProtectedRoute = ({ children }) => {
-    const { isAuthenticated } = useUser();
+    const { isAuthenticated, isLoading } = useUser();
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
 
     useEffect(() => {
         const checkAuth = async () => {
-            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio'].includes(router.pathname);
+            if (isLoading) return;
+
+            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404'].includes(router.pathname);
 
             if (isAuthenticated) {
                 if (router.pathname === '/login' || router.pathname === '/cadastro') {
@@ -19,8 +21,12 @@ const ProtectedRoute = ({ children }) => {
                     } catch (err) {
                         console.error('Redirecionamento falhou', err);
                     }
+                } else {
+                    setIsChecking(false);
+                    return;
                 }
-            } else if (!isPublicRoute) {
+            } 
+            else if (!isAuthenticated && !isPublicRoute) {
                 try {
                     await router.replace('/login');
                     return;
@@ -28,14 +34,15 @@ const ProtectedRoute = ({ children }) => {
                     console.error('Redirecionamento falhou', err);
                 }
             }
+
             setIsChecking(false);
         };
 
         checkAuth();
-    }, [isAuthenticated, router]);
+    }, [isAuthenticated, isLoading, router.pathname]);
 
-    if (isChecking) {
-        return <div>Redirecionando...</div>;
+    if (isLoading || isChecking) {
+        return <div>Carregando...</div>;
     }
 
     return children;

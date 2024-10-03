@@ -2,6 +2,7 @@ import useUserDashboard from "@/components/functions/UserDashboardFunctions";
 import Modal from "@/components/processos/ModalProcesso";
 import { Container, FontBold, Subtitulo, Titulo } from "@/theme/GlobalStyles";
 import { BotaoEditIcone, BotoesListaProcesso, BtnBuscaProcesso, ContainerInputBtnBuscaProcesso, DescricaoTd, FuncoesListaProcessos, InputBuscaProcesso, ListaProcessos, ModalInternalContainer, TdListaProcessos } from "@/theme/UserDashboardTheme";
+import Head from "next/head";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
@@ -29,7 +30,10 @@ export default function ProcessosEncerrados() {
 
     return (
         <Container>
-            <Titulo>Processos Encerrados</Titulo>
+            <Head>
+                <title>Lex Libris - Processos encerrados</title>
+            </Head>
+            <Titulo style={{marginBottom: '1rem'}}>Processos Encerrados</Titulo>
             <ContainerInputBtnBuscaProcesso>
                 <InputBuscaProcesso
                     type="text"

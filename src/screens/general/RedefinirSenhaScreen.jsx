@@ -1,5 +1,6 @@
 import RedefinirSenhaFunction from "@/components/functions/RedefinirSenhaFunctions"
 import { BotaoSubmit, CamposInput, Container, ContainerFormulario, ContainerLabelInput, ContainerLogo, Formulario, StyledError, StyledSuccess, TextoLabel, Titulo } from "@/theme/GlobalStyles";
+import Head from "next/head";
 import React from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 
@@ -16,6 +17,9 @@ export default function RedefinirSenhaScreen() {
 
     return (
         <React.Fragment>
+            <Head>
+                <title>Lex Libris - Redefinir Senha</title>
+            </Head>
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo />

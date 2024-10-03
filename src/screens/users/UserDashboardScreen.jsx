@@ -11,6 +11,7 @@ import { RiPhoneLine, RiUser3Line, RiMenuFill } from "react-icons/ri";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { BotaoSubmit, CamposInput, Container, ContainerLabelInput, Formulario, StyledError, TextoLabel, Titulo, Subtitulo, StyledSuccess } from '@/theme/GlobalStyles'
 import ModalUserProfile from "@/components/functions/ModalUserProfile";
+import Head from "next/head";
 
 export default function UserDashboardScreen() {
     const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
@@ -67,6 +68,9 @@ export default function UserDashboardScreen() {
 
     return (
         <ProtectedRoute publicRoutes={['/', '/login', '/cadastro']}>
+            <Head>
+                <title>Lex Libris - Painel do usuário</title>
+            </Head>
             <TituloUser onClick={toggleSubmenu}>
                 <RiMenuFill /> Bem-vindo, {nomeAdvogado}!
             </TituloUser>
@@ -103,7 +107,7 @@ export default function UserDashboardScreen() {
                             <TxtUsuarioDashboard>
                                 Processos em Andamento
                             </TxtUsuarioDashboard>
-                            <TxtUsuarioDashboard>
+                            <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
                                 {processos.filter(processo => processo.status_processo === 'em andamento').length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
@@ -111,7 +115,7 @@ export default function UserDashboardScreen() {
                             <TxtUsuarioDashboard>
                                 Processos Encerrados
                             </TxtUsuarioDashboard>
-                            <TxtUsuarioDashboard>
+                            <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
                                 {processos.filter(processo => processo.status_processo === 'encerrado').length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
@@ -119,7 +123,7 @@ export default function UserDashboardScreen() {
                     <TxtUsuarioDashboard>
                         Lista de Clientes
                     </TxtUsuarioDashboard>
-                    <ContainerInputBtnBuscaProcesso>
+                    <ContainerInputBtnBuscaProcesso  style={{marginTop: '1rem'}}>
                         <InputBuscaProcesso
                             type="text"
                             name="buscaCliente"

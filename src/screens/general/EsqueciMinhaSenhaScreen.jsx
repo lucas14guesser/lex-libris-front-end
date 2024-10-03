@@ -1,5 +1,6 @@
 import EsqueciMinhaSenhaFunctions from "@/components/functions/EsqueciMinhaSenhaFunctions"
 import { BotaoSubmit, CamposInput, Container, ContainerFormulario, ContainerLabelInput, ContainerLogo, Formulario, StyledError, StyledSuccess, TextoLabel, Titulo } from "@/theme/GlobalStyles";
+import Head from "next/head";
 import { RiMailLine } from 'react-icons/ri'
 
 export default function EsqueciMinhaSenhaScreen() {
@@ -13,6 +14,9 @@ export default function EsqueciMinhaSenhaScreen() {
 
     return (
         <Container>
+            <Head>
+                <title>Lex Libris - Esqueci minha senha</title>
+            </Head>
             <ContainerFormulario>
                 <ContainerLogo />
                 <Titulo>

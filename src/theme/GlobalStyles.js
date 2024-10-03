@@ -2,16 +2,20 @@ import { createGlobalStyle, styled } from "styled-components"
 import Link from "next/link"
 
 export const GlobalStyle = createGlobalStyle`
-#root, html, body {
+#root, html, body, {
     background-color: #E6E6E6;
     line-height: 1;
     color: #000D20;
     margin: 0;
     padding: 0;
-    border: 0;
     font-size: 100%;
     vertical-align: baseline;
     font-family: "Roboto", sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 `
 export const Titulo = styled.h1`

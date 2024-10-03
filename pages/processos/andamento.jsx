@@ -3,6 +3,7 @@ import ModalEdit from "@/components/processos/ModalEditProcesso";
 import Modal from "@/components/processos/ModalProcesso";
 import { Container, FontBold, Subtitulo, Titulo } from "@/theme/GlobalStyles";
 import { BotaoEditIcone, BotoesListaProcesso, BtnBuscaProcesso, ButtonEdit, ContainerInputBtnBuscaProcesso, DescricaoTd, FuncoesListaProcessos, InputBuscaProcesso, ListaProcessos, ModalInternalContainer, OptionStatus, SelectStatus, TdListaProcessos } from "@/theme/UserDashboardTheme";
+import Head from "next/head";
 import { useState } from "react";
 import { FaSearch, FaEdit } from "react-icons/fa";
 
@@ -29,7 +30,10 @@ export default function ProcessosEmAndamento() {
 
     return (
         <Container>
-            <Titulo>Processos em Andamento</Titulo>
+            <Head>
+                <title>Lex Libris - Processos em andamento</title>
+            </Head>
+            <Titulo style={{marginBottom: '1rem'}}>Processos em Andamento</Titulo>
             <ContainerInputBtnBuscaProcesso>
                 <InputBuscaProcesso
                     type="text"

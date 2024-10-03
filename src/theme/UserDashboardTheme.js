@@ -7,7 +7,7 @@ flex-direction: row;
 align-items: center;
 gap: 1rem;
 font-size: 2rem;
-margin: 3rem 0 0 3rem;
+margin: 0 0 0 3rem;
 cursor: pointer;
 color: #000D20;
 font-family: "Roboto", sans-serif;
@@ -68,8 +68,8 @@ export const ContainerProcessosAndEnc = styled.div`
     margin: 2rem 0;
 `
 export const LinkProcessosAndEnc = styled(Link)`
-    width: 245px;
-    padding: 2rem;
+    width: 19rem;
+    padding: 3rem;
     border: 1px solid #E6E6E6;
     border-radius: 16px;
     background: #000D20;
@@ -174,7 +174,8 @@ gap: 2rem;
 export const ContainerButtonsFunctions = styled.div`
 display: flex;
 flex-direction: column;
-margin: 1rem 0 0 6.25rem;
+position: absolute;
+margin: .7rem 0 0 6.2rem;
 width: 12%;
 background: #000D20;
 `

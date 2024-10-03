@@ -1,12 +1,13 @@
-import { Container } from "@/theme/GlobalStyles"
-import Link from "next/link"
+import { Container, Titulo } from "@/theme/GlobalStyles"
+import Head from "next/head"
 
 export default function HomeScreen() {
     return (
         <Container>
-            <h1>Você está na página principal</h1>
-            <Link href='/login'>Ir para Login</Link>
-            <Link href='/cadastro'>Ir para Cadastro</Link>
+            <Head>
+                <title>Lex Libris - Página Inicial</title>
+            </Head>
+            <Titulo>Você está na página principal</Titulo>
         </Container>
     )
 }

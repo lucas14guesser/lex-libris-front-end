@@ -20,10 +20,6 @@ export default function LoginScreen() {
             <Head>
                 <title>Lex Libris - Login</title>
             </Head>
-            <Link
-                href="/">
-                Ir para a Home
-            </Link>
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo>
