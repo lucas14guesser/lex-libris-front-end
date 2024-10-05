@@ -20,7 +20,6 @@ export const GlobalStyle = createGlobalStyle`
 `
 export const Titulo = styled.h1`
 font-size: 2rem;
-margin-top: 3rem;
 color: #000D20;
 font-family: "Roboto", sans-serif;
 `

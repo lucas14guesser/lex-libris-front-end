@@ -33,7 +33,7 @@ export default function ProcessosEncerrados() {
             <Head>
                 <title>Lex Libris - Processos encerrados</title>
             </Head>
-            <Titulo style={{marginBottom: '1rem'}}>Processos Encerrados</Titulo>
+            <Titulo style={{marginBottom: '2rem'}}>Processos Encerrados</Titulo>
             <ContainerInputBtnBuscaProcesso>
                 <InputBuscaProcesso
                     type="text"

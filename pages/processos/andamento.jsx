@@ -33,7 +33,7 @@ export default function ProcessosEmAndamento() {
             <Head>
                 <title>Lex Libris - Processos em andamento</title>
             </Head>
-            <Titulo style={{marginBottom: '1rem'}}>Processos em Andamento</Titulo>
+            <Titulo style={{marginBottom: '2rem'}}>Processos em Andamento</Titulo>
             <ContainerInputBtnBuscaProcesso>
                 <InputBuscaProcesso
                     type="text"

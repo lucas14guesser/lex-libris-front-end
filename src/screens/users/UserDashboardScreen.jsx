@@ -72,7 +72,7 @@ export default function UserDashboardScreen() {
                 <title>Lex Libris - Painel do usuário</title>
             </Head>
             <TituloUser onClick={toggleSubmenu}>
-                <RiMenuFill /> Bem-vindo, {nomeAdvogado}!
+                <RiMenuFill /> Boas-vindas, {nomeAdvogado}!
             </TituloUser>
             {submenuAbrir && (
                 <ContainerButtonsFunctions>
@@ -89,7 +89,7 @@ export default function UserDashboardScreen() {
             )}
             <Container>
                 <ContainerUserDashboard>
-                    <Titulo>
+                    <Titulo style={{marginTop: '3rem'}}>
                         Visão Geral {nomeEscritorio ? `- ${nomeEscritorio}` : ''}
                     </Titulo>
                     {!nomeEscritorio && (
