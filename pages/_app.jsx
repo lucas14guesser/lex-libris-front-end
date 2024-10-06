@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <Navbar />
       <UserProvider>
-        <ProtectedRoute publicRoutes={['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404']}>
+        <ProtectedRoute>
           <Component {...pageProps} />
         </ProtectedRoute>
       </UserProvider>

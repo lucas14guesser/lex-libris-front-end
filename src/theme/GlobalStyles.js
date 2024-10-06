@@ -82,6 +82,27 @@ export const CamposInput = styled.input`
 	background: #FFFFFF;
 	padding: .5rem;
     outline: none;
+    font-size: 1rem;
+
+    &:focus {
+        transition: 0.13s;
+        border-bottom: .13rem solid #000D20;
+    }
+    &::placeholder {
+        color: #000D20;
+        font-size: 1rem;
+        font-family: "Roboto", sans-serif;
+
+    }
+`
+export const TxtArea = styled.textarea`
+	width: 15rem;
+    border: none;
+	border-bottom: .1rem solid #000D20;
+	background: #FFFFFF;
+	padding: .5rem;
+    outline: none;
+    font-size: 1rem;
 
     &:focus {
         transition: 0.13s;

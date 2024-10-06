@@ -31,7 +31,7 @@ export default function CadastroScreen() {
                 <ContainerFormulario>
                     <ContainerLogo>
                     </ContainerLogo>
-                    <Titulo>
+                    <Titulo style={{marginTop: '3rem'}}>
                         Cadastro
                     </Titulo>
                     <Formulario

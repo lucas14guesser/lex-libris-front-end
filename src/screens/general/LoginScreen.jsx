@@ -24,7 +24,7 @@ export default function LoginScreen() {
                 <ContainerFormulario>
                     <ContainerLogo>
                     </ContainerLogo>
-                    <Titulo>
+                    <Titulo style={{marginTop: '3rem'}}>
                         Login
                     </Titulo>
                     <Formulario
