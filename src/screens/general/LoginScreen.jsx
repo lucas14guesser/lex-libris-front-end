@@ -4,7 +4,6 @@ import LoginFunctions from "@/components/functions/LoginFunctions";
 import { BotaoSubmit, CamposInput, ContainerFormulario, ContainerLabelInput, Formulario, TextoLabel, Titulo, StyledError, Container, ContainerLogo } from "@/theme/GlobalStyles";
 import { ContainerLoginForgot, LinkCadastreSe, LinkForgot } from "@/theme/LoginScreenStyles";
 import { RiUser3Line, RiLockPasswordLine } from "react-icons/ri";
-import Link from "next/link";
 
 export default function LoginScreen() {
     const {

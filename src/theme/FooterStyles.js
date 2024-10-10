@@ -16,7 +16,7 @@ display: flex;
 flex-direction: column;
 gap: 1rem;
 align-items: flex-start;
-margin: 0 7.5rem;
+margin: 0 7rem;
 `
 export const TxtFooter = styled.p`
 font-size: 1rem;

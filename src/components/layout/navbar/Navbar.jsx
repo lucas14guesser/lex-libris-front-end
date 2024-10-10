@@ -17,9 +17,6 @@ function Navbar() {
                     <LinkNavBar href="/planos">Planos</LinkNavBar>
                 </li>
                 <li>
-                    <LinkNavBar href="/sobre">Quem Somos</LinkNavBar>
-                </li>
-                <li>
                     <LinkNavBar href="/contato">Contate-nos</LinkNavBar>
                 </li>
                 <ItemListaLogCad>
