@@ -29,9 +29,6 @@ function Footer() {
             <LinksAcessoFooter href='/planos'>Planos</LinksAcessoFooter>
           </li>
           <li>
-            <LinksAcessoFooter href='/sobre'>Quem somos</LinksAcessoFooter>
-          </li>
-          <li>
             <LinksAcessoFooter href='/contato'>Contate-nos</LinksAcessoFooter>
           </li>
         </ListaFooter>

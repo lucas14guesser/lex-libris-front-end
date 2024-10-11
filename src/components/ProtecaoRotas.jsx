@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
         const checkAuth = async () => {
             if (isLoading) return;
 
-            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos'].includes(router.pathname);
+            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos', '/politicaPrivacidade', '/centralAjuda'].includes(router.pathname);
 
             if (isAuthenticated) {
                 if (router.pathname === '/login' || router.pathname === '/cadastro') {

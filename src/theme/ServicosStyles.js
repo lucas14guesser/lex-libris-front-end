@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const ContainerServicos = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-`;
-
+`
 export const ApresentacaoServicos = styled.div`
   text-align: center;
   margin-bottom: 4rem;
@@ -18,8 +17,7 @@ export const ApresentacaoServicos = styled.div`
     font-size: 1.2rem;
     color: #000D20;
   }
-`;
-
+`
 export const ConteudoServicos = styled.div`
   margin-bottom: 2rem;
 
@@ -34,5 +32,4 @@ export const ConteudoServicos = styled.div`
     color: #000D20;
     line-height: 1.6;
   }
-`;
-
+`
