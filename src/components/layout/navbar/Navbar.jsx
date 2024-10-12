@@ -7,7 +7,7 @@ function Navbar() {
             <ListaNavBar>
                 <li>
                     <LinkNavBar href="/">
-                        <img src="./favicon.ico" alt="Logo Lex Libris" style={{ width: '7rem' }} />
+                        <img src="/favicon.ico" alt="Logo Lex Libris" style={{ width: '7rem' }} />
                     </LinkNavBar>
                 </li>
                 <li>

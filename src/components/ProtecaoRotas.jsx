@@ -7,11 +7,12 @@ const ProtectedRoute = ({ children }) => {
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
 
+    const publicRoutes = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos', '/politicaPrivacidade', '/centralAjuda'];
+    const isPublicRoute = publicRoutes.includes(router.pathname);
+
     useEffect(() => {
         const checkAuth = async () => {
             if (isLoading) return;
-
-            const isPublicRoute = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos', '/politicaPrivacidade', '/centralAjuda'].includes(router.pathname);
 
             if (isAuthenticated) {
                 if (router.pathname === '/login' || router.pathname === '/cadastro') {
@@ -41,7 +42,7 @@ const ProtectedRoute = ({ children }) => {
         checkAuth();
     }, [isAuthenticated, isLoading, router.pathname]);
 
-    if (isLoading || isChecking) {
+    if (!isPublicRoute && (isLoading || isChecking)) {
         return <div>Carregando...</div>;
     }
 
