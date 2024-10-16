@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useUser } from '../../context/UserContext';
 import useUserDashboard from "../../components/functions/UserDashboardFunctions";
 import CadastroFunction from '@/components/functions/CadastroFunctions';
-import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkProcessosAndEnc, ListaClientes, ModalInternalContainer, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
+import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkConfigEscritorio, LinkProcessosAndEnc, ListaClientes, ModalInternalContainer, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 import { FaSearch } from "react-icons/fa";
 import ModalCadEscri from "@/components/functions/ModalCadEscri";
@@ -79,9 +79,9 @@ export default function UserDashboardScreen() {
                     <BotaoLogout onClick={handleClickModalUserProfile}>
                         Meu perfil
                     </BotaoLogout>
-                    <BotaoLogout>
+                    <LinkConfigEscritorio href='/configurarEscritorio'>
                         Configurar escritório
-                    </BotaoLogout>
+                    </LinkConfigEscritorio>
                     <BotaoLogout onClick={logout}>
                         Sair
                     </BotaoLogout>

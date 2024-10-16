@@ -194,6 +194,24 @@ font-family: "Roboto", sans-serif;
         color: #000D20;
     }
 `
+export const LinkConfigEscritorio = styled(Link)`
+display: flex;
+justify-content: center;
+text-decoration: none;
+border: none;
+border: 1px solid #000D20;
+padding: 1rem;
+background: #000D20;
+cursor: pointer;
+font-size: 1rem;
+color: #E6E6E6;
+font-family: "Roboto", sans-serif;
+        &:hover {
+        transition: 0.3s;
+        background: #FFFFFF;
+        color: #000D20;
+    }
+`
 export const BotoesListaProcesso = styled.div`
 display: flex;
 flex-direction: row;
@@ -241,6 +259,10 @@ width: 100%;
 color: #000D20;
 `
 export const ModalInternalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
   text-align: start;
 `
 export const ButtonEdit = styled.button`
