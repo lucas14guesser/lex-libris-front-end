@@ -151,3 +151,11 @@ color: #000D20;
 text-decoration: underline;
 margin-top: 1rem;
 `
+export const LinkBackToDashboard = styled(Link) `
+display: flex;
+align-items: center;
+font-size: 1.1rem;
+color: #000D20;
+text-decoration: underline;
+margin: 0 0 2rem 4rem;
+`

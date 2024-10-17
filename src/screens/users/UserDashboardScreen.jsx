@@ -6,6 +6,7 @@ import CadastroFunction from '@/components/functions/CadastroFunctions';
 import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkConfigEscritorio, LinkProcessosAndEnc, ListaClientes, ModalInternalContainer, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
 import { FaSearch } from "react-icons/fa";
+import { AiOutlineCloseCircle, AiOutlineClockCircle, AiOutlineProfile } from "react-icons/ai";
 import ModalCadEscri from "@/components/functions/ModalCadEscri";
 import { RiPhoneLine, RiUser3Line, RiMenuFill } from "react-icons/ri";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
@@ -14,7 +15,7 @@ import ModalUserProfile from "@/components/functions/ModalUserProfile";
 import Head from "next/head";
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
+    const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, agendamentos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
     const { telefoneEscritorioCreate, setTelefoneEscritorioCreate, nomeEscritorioCreate, setNomeEscritorioCreate, advogadoResp, setAdvogadoResp, handleCadastroEscritorio, error, success } = CadastroFunction();
     const { userEmail } = useUser()
     const { logout, isAuthenticated } = useUser();
@@ -105,7 +106,8 @@ export default function UserDashboardScreen() {
                     <ContainerProcessosAndEnc>
                         <LinkProcessosAndEnc href="/processos/andamento">
                             <TxtUsuarioDashboard>
-                                Processos em Andamento
+                                Processos em Andamento <br />
+                                <AiOutlineClockCircle style={{marginTop: '.5rem', fontSize: '1.5rem'}}/>
                             </TxtUsuarioDashboard>
                             <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
                                 {processos.filter(processo => processo.status_processo === 'em andamento').length}
@@ -113,10 +115,20 @@ export default function UserDashboardScreen() {
                         </LinkProcessosAndEnc>
                         <LinkProcessosAndEnc href="/processos/encerrados">
                             <TxtUsuarioDashboard>
-                                Processos Encerrados
+                                Processos Encerrados <br />
+                                <AiOutlineCloseCircle style={{marginTop: '.5rem', fontSize: '1.5rem'}}/>
                             </TxtUsuarioDashboard>
                             <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
                                 {processos.filter(processo => processo.status_processo === 'encerrado').length}
+                            </TxtUsuarioDashboard>
+                        </LinkProcessosAndEnc>
+                        <LinkProcessosAndEnc href="/agendamentos">
+                            <TxtUsuarioDashboard>
+                                Agendamentos Realizados <br />
+                                <AiOutlineProfile style={{marginTop: '.5rem', fontSize: '1.5rem'}}/>
+                            </TxtUsuarioDashboard>
+                            <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
+                                {agendamentos.length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
                     </ContainerProcessosAndEnc>

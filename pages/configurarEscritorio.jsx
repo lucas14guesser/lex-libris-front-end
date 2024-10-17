@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import useUserDashboard from '@/components/functions/UserDashboardFunctions';
 import { ContainerConfig, DivLabelInput, DivSubTitleArrow, FormularioConfig, SaveButton, TextoLabelConfig, TimeInputContainer } from '@/theme/ConfiguracaoEscritorioStyles';
-import { StyledError, StyledSuccess, Subtitulo, Titulo } from '@/theme/GlobalStyles';
-import { FaArrowRight } from "react-icons/fa";
+import { LinkBackToDashboard, StyledError, StyledSuccess, Subtitulo, Titulo } from '@/theme/GlobalStyles';
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const ConfigurarEscritorio = () => {
     const { telefoneEscritorio } = useUserDashboard();
@@ -67,69 +67,75 @@ const ConfigurarEscritorio = () => {
 
 
     return (
-        <ContainerConfig>
-            <Head>
-                <title>Lex Libris - Configurar Escritório</title>
-            </Head>
-            <Titulo style={{ marginBottom: '1rem' }}>Configurações do Escritório</Titulo>
-            <DivSubTitleArrow>
-                <Subtitulo onClick={handleClickHorariosTrabalho}>Horários de trabalho</Subtitulo>
-                <FaArrowRight />
-            </DivSubTitleArrow>
-            
-            {horariosTrabalhos && (
-                <FormularioConfig onSubmit={(e) => e.preventDefault()}>
-                    {horarios.length > 0 ? (
-                        horarios.map((horario, index) => (
-                            <DivLabelInput key={index}>
-                                <TextoLabelConfig>
-                                    <p>{horario.dia}:</p>
-                                    <input
-                                        type="checkbox"
-                                        checked={horario.ativo === 1}
-                                        onChange={(e) =>
-                                            handleHorarioChange(index, 'ativo', e.target.checked ? 1 : 0)
-                                        }
-                                    />
-                                    <p>Ativar horário</p>
-                                </TextoLabelConfig>
-                                {horario.ativo === 1 && (
-                                    <TimeInputContainer>
-                                        <label>
-                                            Início:
-                                            <input
-                                                type="time"
-                                                value={horario.inicio}
-                                                onChange={(e) =>
-                                                    handleHorarioChange(index, 'inicio', e.target.value)
-                                                }
-                                            />
-                                        </label>
-                                        <label>
-                                            Fim:
-                                            <input
-                                                type="time"
-                                                value={horario.fim}
-                                                onChange={(e) =>
-                                                    handleHorarioChange(index, 'fim', e.target.value)
-                                                }
-                                            />
-                                        </label>
-                                    </TimeInputContainer>
-                                )}
-                            </DivLabelInput>
-                        ))
-                    ) : (
-                        <p>Carregando horários...</p>
-                    )}
-                    {error && <StyledError style={{ margin: '0' }}>{error}</StyledError>}
-                    {sucess && <StyledSuccess style={{ margin: '0' }}>{sucess}</StyledSuccess>}
-                    <SaveButton type="button" onClick={handleSalvar}>
-                        Salvar Configurações
-                    </SaveButton>
-                </FormularioConfig>
-            )}
-        </ContainerConfig>
+        <React.Fragment>
+            <LinkBackToDashboard href='/userDashboard'>
+                <FaArrowLeft />
+                Voltar ao Painel do usuário
+            </LinkBackToDashboard>
+            <ContainerConfig>
+                <Head>
+                    <title>Lex Libris - Configurar Escritório</title>
+                </Head>
+                <Titulo style={{ marginBottom: '1rem' }}>Configurações do Escritório</Titulo>
+                <DivSubTitleArrow>
+                    <Subtitulo onClick={handleClickHorariosTrabalho}>Horários de trabalho</Subtitulo>
+                    <FaArrowRight />
+                </DivSubTitleArrow>
+
+                {horariosTrabalhos && (
+                    <FormularioConfig onSubmit={(e) => e.preventDefault()}>
+                        {horarios.length > 0 ? (
+                            horarios.map((horario, index) => (
+                                <DivLabelInput key={index}>
+                                    <TextoLabelConfig>
+                                        <p>{horario.dia}:</p>
+                                        <input
+                                            type="checkbox"
+                                            checked={horario.ativo === 1}
+                                            onChange={(e) =>
+                                                handleHorarioChange(index, 'ativo', e.target.checked ? 1 : 0)
+                                            }
+                                        />
+                                        <p>Ativar horário</p>
+                                    </TextoLabelConfig>
+                                    {horario.ativo === 1 && (
+                                        <TimeInputContainer>
+                                            <label>
+                                                Início:
+                                                <input
+                                                    type="time"
+                                                    value={horario.inicio}
+                                                    onChange={(e) =>
+                                                        handleHorarioChange(index, 'inicio', e.target.value)
+                                                    }
+                                                />
+                                            </label>
+                                            <label>
+                                                Fim:
+                                                <input
+                                                    type="time"
+                                                    value={horario.fim}
+                                                    onChange={(e) =>
+                                                        handleHorarioChange(index, 'fim', e.target.value)
+                                                    }
+                                                />
+                                            </label>
+                                        </TimeInputContainer>
+                                    )}
+                                </DivLabelInput>
+                            ))
+                        ) : (
+                            <p>Carregando horários...</p>
+                        )}
+                        {error && <StyledError style={{ margin: '0' }}>{error}</StyledError>}
+                        {sucess && <StyledSuccess style={{ margin: '0' }}>{sucess}</StyledSuccess>}
+                        <SaveButton type="button" onClick={handleSalvar}>
+                            Salvar Configurações
+                        </SaveButton>
+                    </FormularioConfig>
+                )}
+            </ContainerConfig>
+        </React.Fragment>
     );
 
 };

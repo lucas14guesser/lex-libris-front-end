@@ -265,6 +265,35 @@ export const ModalInternalContainer = styled.div`
   margin-top: 1rem;
   text-align: start;
 `
+export const StyledSelect = styled.select`
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #000D20;
+    border-radius: 4px;
+    background-color: #E6E6E6;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+
+    &:focus {
+        outline: none;
+    }
+`
+export const StyledOption = styled.option`
+    padding: 8px;
+    background-color: #FFFFFF;
+    color: #000D20;
+
+    &:disabled {
+        color: #000D20;
+    }
+`
+export const DivFlexButtonSubmit = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 2rem;
+`
 export const ButtonEdit = styled.button`
 background: #000D20;
 color: #FFFFFF;

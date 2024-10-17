@@ -8,6 +8,7 @@ export default function useUserDashboard() {
     const [nomeEscritorio, setNomeEscritorio] = useState('');
     const [clientes, setClientes] = useState([]);
     const [processos, setProcessos] = useState([]);
+    const [agendamentos, setAgendamentos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [telefoneEscritorio, setTelefoneEscritorio] = useState('');
@@ -129,7 +130,19 @@ export default function useUserDashboard() {
             }
         };
         fetchDadosEscritorio();
-    })
+    });
+
+    useEffect(() => {
+        const fetchDadosAgendamento = async () => {
+            try {
+                const resp = await axios.get(`http://localhost:3001/lex/agendamento/${telefoneEscritorio}`);
+                setAgendamentos(resp.data.result);
+            } catch (error) {
+                console.error('Erro ao buscar dados do agendamento');
+            }
+        };
+        fetchDadosAgendamento();
+    });
 
     useEffect(() => {
         const fetchDados = async () => {
@@ -189,5 +202,5 @@ export default function useUserDashboard() {
         fetchDados();
     }, [userEmail]);
 
-    return { nomeAdvogado, nomeEscritorio, userEmail, telefoneEscritorio, clientes, processos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile };
+    return { nomeAdvogado, nomeEscritorio, userEmail, telefoneEscritorio, clientes, processos, agendamentos, setProcessos, loading, setLoading, error, editField, modalEditOpen, modalOpen, handleClickEditarWindow, handleClickEditar, handleChangeField, handleSaveEditClick, handleCloseModalEdit, handleClickConsultar, handleCloseModal, selectedProcess, numeroProcesso, setNumeroProcesso, areaProcesso, setAreaProcesso, statusProcesso, setStatusProcesso, handleClickReabrir, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile };
 }
