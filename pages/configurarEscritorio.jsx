@@ -2,19 +2,27 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import useUserDashboard from '@/components/functions/UserDashboardFunctions';
+import { ContainerConfig, DivLabelInput, DivSubTitleArrow, FormularioConfig, SaveButton, TextoLabelConfig, TimeInputContainer } from '@/theme/ConfiguracaoEscritorioStyles';
+import { StyledError, StyledSuccess, Subtitulo, Titulo } from '@/theme/GlobalStyles';
+import { FaArrowRight } from "react-icons/fa";
 
 const ConfigurarEscritorio = () => {
     const { telefoneEscritorio } = useUserDashboard();
-    const [horarios, setHorarios] = useState([
-        { dia: 'Segunda', inicio: '', fim: '', ativo: false },
-        { dia: 'Terça', inicio: '', fim: '', ativo: false },
-        { dia: 'Quarta', inicio: '', fim: '', ativo: false },
-        { dia: 'Quinta', inicio: '', fim: '', ativo: false },
-        { dia: 'Sexta', inicio: '', fim: '', ativo: false },
-        { dia: 'Sábado', inicio: '', fim: '', ativo: false },
-        { dia: 'Domingo', inicio: '', fim: '', ativo: false },
-    ]);
-    const [mensagem, setMensagem] = useState('');
+    const [horarios, setHorarios] = useState([]);
+    const [sucess, setSucess] = useState('');
+    const [error, setError] = useState('')
+    const [horariosTrabalhos, setHorariosTrabalho] = useState(false);
+
+    const carregarHorarios = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3001/lex/verificar-configuracao/${telefoneEscritorio}`);
+            if (response.status === 200 && response.data.result) {
+                setHorarios(response.data.result);
+            }
+        } catch (error) {
+            console.error('Erro ao carregar horários:', error);
+        }
+    };
 
     const handleHorarioChange = (index, campo, valor) => {
         setHorarios(prevHorarios => {
@@ -25,44 +33,31 @@ const ConfigurarEscritorio = () => {
     };
 
     const handleSalvar = async () => {
-        setMensagem('');
+        setSucess('');
+        setError
         if (!telefoneEscritorio) {
-            setMensagem('O número de telefone do escritório não está disponível.');
+            setError('O número de telefone do escritório não está disponível.');
             return;
         }
 
-        const horariosParaSalvar = horarios.map(h => ({
-            dia: h.dia,
-            inicio: h.inicio,
-            fim: h.fim,
-            ativo: h.ativo
-        }));
-
         try {
             const response = await axios.post(`http://localhost:3001/lex/configurar-escritorio/${telefoneEscritorio}/horarios`, {
-                horarios: horariosParaSalvar,
+                horarios,
             });
 
             if (response.status === 200) {
-                setMensagem('Configurações salvas com sucesso!');
+                setSucess('Configurações salvas com sucesso!');
                 carregarHorarios();
             }
         } catch (error) {
             console.error('Erro ao salvar configurações:', error);
-            setMensagem('Erro ao salvar configurações. Tente novamente.');
+            setError('Erro ao salvar configurações. Tente novamente.');
         }
     };
 
-    const carregarHorarios = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3001/lex/configurar-escritorio/${telefoneEscritorio}/horarios`);
-            if (response.status === 200 && response.data.horarios) {
-                setHorarios(response.data.horarios);
-            }
-        } catch (error) {
-            console.error('Erro ao carregar horários:', error);
-        }
-    };
+    const handleClickHorariosTrabalho = () => {
+        setHorariosTrabalho(!horariosTrabalhos);
+    }
 
     useEffect(() => {
         if (telefoneEscritorio) {
@@ -70,63 +65,73 @@ const ConfigurarEscritorio = () => {
         }
     }, [telefoneEscritorio]);
 
+
     return (
-        <div>
+        <ContainerConfig>
             <Head>
                 <title>Lex Libris - Configurar Escritório</title>
             </Head>
-            <h1>Configurações do Escritório</h1>
-            <form onSubmit={(e) => e.preventDefault()}>
-                {horarios.length > 0 ? (
-                    horarios.map((horario, index) => (
-                        <div key={index} className="horario-config">
-                            <label>
-                                {horario.dia}:
-                                <input
-                                    type="checkbox"
-                                    checked={horario.ativo}
-                                    onChange={(e) =>
-                                        handleHorarioChange(index, 'ativo', e.target.checked)
-                                    }
-                                />
-                                Ativo
-                            </label>
-                            {horario.ativo && (
-                                <div className="horario-inputs">
-                                    <label>
-                                        Início:
-                                        <input
-                                            type="time"
-                                            value={horario.inicio}
-                                            onChange={(e) =>
-                                                handleHorarioChange(index, 'inicio', e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <label>
-                                        Fim:
-                                        <input
-                                            type="time"
-                                            value={horario.fim}
-                                            onChange={(e) =>
-                                                handleHorarioChange(index, 'fim', e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                </div>
-                            )}
-                        </div>
-                    ))
-                ) : (
-                    <p>Carregando horários...</p>
-                )}
-                {mensagem && <p>{mensagem}</p>}
-                <button type="button" onClick={handleSalvar}>
-                    Salvar Configurações
-                </button>
-            </form>
-        </div>
+            <Titulo style={{ marginBottom: '1rem' }}>Configurações do Escritório</Titulo>
+            <DivSubTitleArrow>
+                <Subtitulo onClick={handleClickHorariosTrabalho}>Horários de trabalho</Subtitulo>
+                <FaArrowRight />
+            </DivSubTitleArrow>
+            
+            {horariosTrabalhos && (
+                <FormularioConfig onSubmit={(e) => e.preventDefault()}>
+                    {horarios.length > 0 ? (
+                        horarios.map((horario, index) => (
+                            <DivLabelInput key={index}>
+                                <TextoLabelConfig>
+                                    <p>{horario.dia}:</p>
+                                    <input
+                                        type="checkbox"
+                                        checked={horario.ativo === 1}
+                                        onChange={(e) =>
+                                            handleHorarioChange(index, 'ativo', e.target.checked ? 1 : 0)
+                                        }
+                                    />
+                                    <p>Ativar horário</p>
+                                </TextoLabelConfig>
+                                {horario.ativo === 1 && (
+                                    <TimeInputContainer>
+                                        <label>
+                                            Início:
+                                            <input
+                                                type="time"
+                                                value={horario.inicio}
+                                                onChange={(e) =>
+                                                    handleHorarioChange(index, 'inicio', e.target.value)
+                                                }
+                                            />
+                                        </label>
+                                        <label>
+                                            Fim:
+                                            <input
+                                                type="time"
+                                                value={horario.fim}
+                                                onChange={(e) =>
+                                                    handleHorarioChange(index, 'fim', e.target.value)
+                                                }
+                                            />
+                                        </label>
+                                    </TimeInputContainer>
+                                )}
+                            </DivLabelInput>
+                        ))
+                    ) : (
+                        <p>Carregando horários...</p>
+                    )}
+                    {error && <StyledError style={{ margin: '0' }}>{error}</StyledError>}
+                    {sucess && <StyledSuccess style={{ margin: '0' }}>{sucess}</StyledSuccess>}
+                    <SaveButton type="button" onClick={handleSalvar}>
+                        Salvar Configurações
+                    </SaveButton>
+                </FormularioConfig>
+            )}
+        </ContainerConfig>
     );
+
 };
 
 export default ConfigurarEscritorio;
