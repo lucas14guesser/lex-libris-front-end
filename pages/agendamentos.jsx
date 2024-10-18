@@ -169,7 +169,7 @@ function Agendamentos() {
                                     <th>Cliente</th>
                                     <th>Data</th>
                                     <th>Hora</th>
-                                    <th>Funcionário</th>
+                                    <th>Advogado</th>
                                     <th>Funções</th>
                                 </tr>
                             </thead>
@@ -211,7 +211,7 @@ function Agendamentos() {
                             <p><FontBold>Cliente:</FontBold> {clientesMap.get(selectedAgendamento.cliente_envolv)?.nome || 'N/D'}</p>
                             <p><FontBold>Data:</FontBold> {formatarData(selectedAgendamento.data_agendamento)}</p>
                             <p><FontBold>Hora:</FontBold> {selectedAgendamento.hora_agendamento}</p>
-                            <p><FontBold>Funcionário:</FontBold> {funcionariosMap.get(selectedAgendamento.id_funcionario) || 'N/D'}</p>
+                            <p><FontBold>Advogado atendente:</FontBold> {funcionariosMap.get(selectedAgendamento.id_funcionario) || 'N/D'}</p>
                         </ModalInternalContainer>
                     </ModalAgendamentos>
                 )}
@@ -222,14 +222,14 @@ function Agendamentos() {
                         <ModalInternalContainer>
                             <p><FontBold>Código do Agendamento:</FontBold> {selectedAgendamento.cod_agendamento}</p>
                             <p><FontBold>Cliente:</FontBold> {clientesMap.get(selectedAgendamento.cliente_envolv)?.nome || 'N/D'}</p>
-                            <p><FontBold>Funcionário Atual:</FontBold> {funcionariosMap.get(selectedAgendamento.id_funcionario) || 'N/D'}</p>
-                            <label htmlFor="funcionarioSelect">Selecione um funcionário:</label>
+                            <p><FontBold>Advogado Atendente:</FontBold> {funcionariosMap.get(selectedAgendamento.id_funcionario) || 'N/D'}</p>
+                            <label htmlFor="funcionarioSelect">Selecione um advogado:</label>
                             <StyledSelect
                                 id="funcionarioSelect"
                                 value={selectedFuncionario}
                                 onChange={(e) => setSelectedFuncionario(e.target.value)}
                             >
-                                <StyledOption value="" disabled>Selecione um funcionário</StyledOption>
+                                <StyledOption value="" disabled>Selecione um advogado</StyledOption>
                                 {funcionarios.map(func => (
                                     <option key={func.id_funcionario} value={func.nome_funcionario}>
                                         {func.nome_funcionario}

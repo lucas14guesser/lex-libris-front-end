@@ -8,12 +8,13 @@ export const ContainerConfig = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
-export const DivSubTitleArrow = styled.div`
+export const DivSubTitleArrowHandle = styled.div`
 display: flex;
-align-items: center;
+flex-direction: column;
 gap: .3rem;
 cursor: pointer;
 margin-bottom: 1rem;
+width: 35rem;
 `
 export const FormularioConfig = styled.form`
   display: flex;
