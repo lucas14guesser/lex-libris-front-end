@@ -9,7 +9,7 @@ background: #000D20;
 color: #FFFFFF;
 align-items: flex-start;
 padding: 3rem;
-margin-top: 7rem;
+margin-top: 9rem;
 `
 export const ContainerInfoFooter = styled.div`
 display: flex;

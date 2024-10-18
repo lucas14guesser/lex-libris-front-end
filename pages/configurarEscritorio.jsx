@@ -63,39 +63,40 @@ const ConfigurarEscritorio = () => {
 
     const handleCadastrarFuncionario = async (e) => {
         e.preventDefault();
-        setSucess('');
-        setError('');
+
 
         try {
-            if (!nomeFunc || !escritorioRel) {
+            if (!nomeFunc || !telefoneEscritorio) {
                 setError('Todos os campos são obrigatórios.');
                 return;
             }
 
             const response = await axios.post('http://localhost:3001/lex/funcionario', {
                 nome_funcionario: nomeFunc,
-                escritorio_relac: escritorioRel
+                escritorio_relac: telefoneEscritorio
             });
 
             if (response.status === 201) {
+                setSucess('Advogado cadastrado com sucesso.');
                 setNomeFunc('');
                 setEscritorioRel('');
             } else {
-                setError('Erro ao cadastrar o funcionário');
+                setError('Erro ao cadastrar o advogado');
             }
         } catch (error) {
-            setError('Erro ao cadastrar funcionário', error);
+            setError('Erro ao cadastrar advogado');
         }
     };
 
     const handleSalvar = async () => {
         setSucess('');
         setError('');
+
         if (!telefoneEscritorio) {
             setError('O número de telefone do escritório não está disponível.');
             return;
         }
-    
+
         try {
             const horariosComDias = horarios.map((horario, index) => ({
                 dia: diasDaSemana[index],
@@ -103,11 +104,11 @@ const ConfigurarEscritorio = () => {
                 fim: horario.fim,
                 ativo: horario.ativo,
             }));
-    
+
             const response = await axios.post(`http://localhost:3001/lex/configurar-escritorio/${telefoneEscritorio}/horarios`, {
                 horarios: horariosComDias,
             });
-    
+
             if (response.status === 200) {
                 setSucess('Configurações salvas com sucesso!');
                 carregarHorarios();
@@ -142,7 +143,7 @@ const ConfigurarEscritorio = () => {
                 <DivSubTitleArrowHandle style={{ width: '17rem' }}>
                     <Subtitulo onClick={handleClickFuncionariosMenu} style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>Configurar advogados <FaArrowRight style={{ fontSize: '1.1rem' }} /></Subtitulo>
                     {funcionariosMenu && (
-                        <Formulario style={{ alignItems: 'flex-start', padding: '0', gap: '1rem' }}>
+                        <Formulario style={{ alignItems: 'flex-start', padding: '0', gap: '1rem' }} onSubmit={handleCadastrarFuncionario}>
                             <ContainerLabelInput>
                                 <TextoLabel htmlFor='nome_func'>
                                     <FaRegUser />
@@ -150,6 +151,7 @@ const ConfigurarEscritorio = () => {
                                 <CamposInput
                                     type='text'
                                     name='nome_func'
+                                    id='nome_func'
                                     placeholder='Nome do Advogado'
                                     value={nomeFunc}
                                     onChange={(e) => setNomeFunc(e.target.value)}
@@ -163,13 +165,14 @@ const ConfigurarEscritorio = () => {
                                     type='text'
                                     name='escritorio_rel'
                                     value={telefoneEscritorio}
-                                    disabled
+                                    readOnly
                                 />
                             </ContainerLabelInput>
-                            <SaveButton type="button" onClick={handleCadastrarFuncionario}>
+                            {sucess && <StyledSuccess style={{ margin: '0' }}>{sucess}</StyledSuccess>}
+                            {error && <StyledError style={{ margin: '0' }}>{error}</StyledError>}
+                            <SaveButton type="submit">
                                 Cadastrar Funcionário
                             </SaveButton>
-                            {error && <StyledError style={{ margin: '0' }}>{error}</StyledError>}
                         </Formulario>
                     )}
                 </DivSubTitleArrowHandle>

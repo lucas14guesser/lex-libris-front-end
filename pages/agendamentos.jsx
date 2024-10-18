@@ -33,6 +33,7 @@ function Agendamentos() {
     const [modalAgendamentosOpen, setModalAgendamentosOpen] = useState(false);
     const [selectedAgendamento, setSelectedAgendamento] = useState(null);
     const [selectedFuncionario, setSelectedFuncionario] = useState('');
+    
 
     useEffect(() => {
         const fetchFuncionarios = async () => {
@@ -105,7 +106,7 @@ function Agendamentos() {
         if (selectedAgendamento && selectedFuncionario) {
             const funcionario = funcionarios.find(func => func.nome_funcionario === selectedFuncionario);
             if (!funcionario) {
-                alert('Funcionário selecionado não foi encontrado!');
+                alert('Advogado selecionado não foi encontrado!');
                 return;
             }
 
@@ -124,13 +125,13 @@ function Agendamentos() {
                 setResultadosBusca(agendamentosAtualizados);
                 setSelectedAgendamento(prev => ({ ...prev, nome_funcionario: funcionario.nome_funcionario, id_funcionario: idFuncionario }));
                 setModalEditAgendamentosOpen(false);
-                alert('Funcionário adicionado ao agendamento com sucesso!');
+                alert('Advogado adicionado ao caso do agendamento com sucesso!');
             } catch (error) {
                 console.error("Erro ao salvar edição do agendamento:", error);
                 alert('Erro ao salvar a edição do agendamento. Tente novamente.');
             }
         } else {
-            alert('Selecione um funcionário antes de salvar!');
+            alert('Selecione um advogado antes de salvar!');
         }
     };
 
