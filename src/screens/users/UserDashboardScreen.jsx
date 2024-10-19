@@ -5,7 +5,7 @@ import useUserDashboard from "../../components/functions/UserDashboardFunctions"
 import CadastroFunction from '@/components/functions/CadastroFunctions';
 import { BotaoLogout, BtnBuscaProcesso, ContainerButtonsFunctions, ContainerInputBtnBuscaProcesso, ContainerProcessosAndEnc, ContainerTxtCadastroEscritorio, ContainerUserDashboard, InputBuscaProcesso, LinkConfigEscritorio, LinkProcessosAndEnc, ListaClientes, ModalInternalContainer, TituloUser, TxtUsuarioDashboard } from "@/theme/UserDashboardTheme";
 import ProtectedRoute from "@/components/ProtecaoRotas";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaRegHandPaper } from "react-icons/fa";
 import { AiOutlineCloseCircle, AiOutlineClockCircle, AiOutlineProfile } from "react-icons/ai";
 import ModalCadEscri from "@/components/functions/ModalCadEscri";
 import { RiPhoneLine, RiUser3Line, RiMenuFill } from "react-icons/ri";
@@ -15,7 +15,7 @@ import ModalUserProfile from "@/components/functions/ModalUserProfile";
 import Head from "next/head";
 
 export default function UserDashboardScreen() {
-    const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, agendamentos, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
+    const { nomeAdvogado, nomeEscritorio, telefoneEscritorio, clientes, processos, agendamentos, diligencias, loading, handleClickModalCadEscri, modalCadEscriOpen, handleCloseModalCadEscri, modalUserProfileOpen, handleClickModalUserProfile, handleCloseModalUserProfile} = useUserDashboard();
     const { telefoneEscritorioCreate, setTelefoneEscritorioCreate, nomeEscritorioCreate, setNomeEscritorioCreate, advogadoResp, setAdvogadoResp, handleCadastroEscritorio, error, success } = CadastroFunction();
     const { userEmail } = useUser()
     const { logout, isAuthenticated } = useUser();
@@ -129,6 +129,15 @@ export default function UserDashboardScreen() {
                             </TxtUsuarioDashboard>
                             <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
                                 {agendamentos.length}
+                            </TxtUsuarioDashboard>
+                        </LinkProcessosAndEnc>
+                        <LinkProcessosAndEnc href="/diligencias">
+                            <TxtUsuarioDashboard>
+                                Diligências Solicitadas <br />
+                                <FaRegHandPaper style={{marginTop: '.5rem', fontSize: '1.5rem'}}/>
+                            </TxtUsuarioDashboard>
+                            <TxtUsuarioDashboard style={{marginTop: '1rem'}}>
+                                {diligencias.length}
                             </TxtUsuarioDashboard>
                         </LinkProcessosAndEnc>
                     </ContainerProcessosAndEnc>

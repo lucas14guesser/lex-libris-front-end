@@ -64,6 +64,8 @@ text-align: center;
 export const ContainerProcessosAndEnc = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
     gap: 2rem;
     margin: 2rem 0;
 `
