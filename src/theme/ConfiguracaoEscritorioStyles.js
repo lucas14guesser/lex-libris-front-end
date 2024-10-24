@@ -14,12 +14,18 @@ flex-direction: column;
 gap: .3rem;
 cursor: pointer;
 margin-bottom: 1rem;
-width: 35rem;
 `
 export const FormularioConfig = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`
+export const ContainerFormularioConfig = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+gap: 2rem;
 `
 export const DivLabelInput = styled.div`
   display: flex;

@@ -255,8 +255,10 @@ export default function UserDashboardScreen() {
                         <p><strong>E-mail:</strong> {advogadoResp}</p>
                         <p><strong>Escritório:</strong> {nomeEscritorio}</p>
                         <p><strong>Telefone:</strong> {telefoneEscritorio}</p>
-                        <p><strong>Clientes totais:</strong> {clientes.length}</p>
-                        <p><strong>Processos totais:</strong> {processos.length}</p>
+                        <p><strong>Clientes:</strong> {clientes.length}</p>
+                        <p><strong>Processos:</strong> {processos.length}</p>
+                        <p><strong>Agendamentos:</strong> {agendamentos.length}</p>
+                        <p><strong>Diligências:</strong> {diligencias.length}</p>
                     </ModalInternalContainer>
                 </ModalUserProfile>
             )}

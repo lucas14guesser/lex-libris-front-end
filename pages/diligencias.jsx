@@ -296,7 +296,7 @@ function Diligencias() {
                                         onChange={(e) => handleFieldChange( 'prazo_realiz', e.target.value )}
                                     />
                                 ) : (
-                                    <span>{selectedDiligencia.prazo_realiz || 'N/D'}</span>
+                                    <span>{formatarData(selectedDiligencia.prazo_realiz) || 'N/D'}</span>
                                 )}
                                 <ButtonEdit onClick={() => setEditFieldDili('prazo_realiz')}>
                                     <FaEdit />

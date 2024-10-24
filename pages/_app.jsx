@@ -9,13 +9,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Navbar />
       <UserProvider>
+        <Navbar />
         <ProtectedRoute>
           <Component {...pageProps} />
         </ProtectedRoute>
+        <Footer />
       </UserProvider>
-      <Footer />
     </>
   );
 }
