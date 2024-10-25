@@ -27,7 +27,7 @@ export default function CadastroScreen() {
             <Head>
                 <title>Lex Libris - Cadastro</title>
             </Head>
-            <Container>
+            <Container style={{marginTop: '7rem'}}>
                 <ContainerFormulario>
                     <ContainerLogo>
                     </ContainerLogo>

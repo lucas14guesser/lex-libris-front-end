@@ -19,7 +19,7 @@ export default function LoginScreen() {
             <Head>
                 <title>Lex Libris - Login</title>
             </Head>
-            <Container>
+            <Container style={{marginTop: '7rem'}}>
                 <ContainerFormulario>
                     <ContainerLogo>
                     </ContainerLogo>

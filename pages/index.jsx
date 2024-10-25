@@ -20,8 +20,8 @@ const HomePage = () => {
     return (
         <div>
             <HeroSection>
-                <Titulo style={{ marginBottom: '1rem' }}>Automatize seu Escritório de Advocacia com Facilidade</Titulo>
-                <Subtitulo style={{ marginBottom: '1rem' }}>
+                <Titulo style={{ marginBottom: '1rem', color: '#FFFFFF' }}>Automatize seu Escritório de Advocacia com Facilidade</Titulo>
+                <Subtitulo style={{ marginBottom: '1rem', color: '#FFFFFF' }}>
                     Gerencie clientes e processos diretamente pelo WhatsApp e controle todas as informações através do nosso painel online.
                 </Subtitulo>
                 <HeroSectionBtn>

@@ -72,7 +72,7 @@ export default function UserDashboardScreen() {
             <Head>
                 <title>Lex Libris - Painel do usuário</title>
             </Head>
-            <TituloUser onClick={toggleSubmenu}>
+            <TituloUser onClick={toggleSubmenu} style={{marginTop: '7rem'}}>
                 <RiMenuFill /> Boas-vindas, {nomeAdvogado}!
             </TituloUser>
             {submenuAbrir && (

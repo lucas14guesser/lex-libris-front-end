@@ -2,9 +2,12 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 export const HeroSection = styled.section`
-padding: 100px 20px;
+padding: 12rem 1rem;
 text-align: center;
 color: #000D20;
+background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/bghome.png") no-repeat;
+background-repeat: no-repeat;
+background-size: cover;
 `
 export const HeroSectionBtn = styled.div`
 display: flex;
@@ -17,19 +20,19 @@ export const HeroButton = styled(Link)`
 display: flex;
 width: 15rem;
 justify-content: center;
-background-color: #000D20;
+background-color: rgba(255, 255, 255, 0.2);
 color: #FFFFFF;
-border: 1px solid #000D20;
+border: 1px solid rgba(255, 255, 255, 0.5);
 padding: 1.3rem;
 margin: 0 1rem;
 font-size: 1em;
 cursor: pointer;
 border-radius: 12px;
-transition: background-color 0.3s;
+transition: background-color 0.3s, color 0.3s;
 text-decoration: none;
 
   &:hover {
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.5);
     color: #000D20;
   }
 `

@@ -5,7 +5,7 @@ import React from 'react'
 
 function planos() {
     return (
-        <Container>
+        <Container style={{marginTop: '7rem'}}>
             <Head>
                 <title>Lex Libris - Planos disponíveis</title>
             </Head>

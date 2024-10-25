@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const ContainerNavBar = styled.div`
 background: #000D20;
 padding: .7rem 0;
-margin-bottom: 7rem;
 `
 export const ListaNavBar = styled.ul`
 display: flex;

@@ -8,7 +8,7 @@ export default function PoliticaPrivacidade() {
             <Head>
                 <title>Lex Libris - Política de Privacidade</title>
             </Head>
-            <ContainerPP>
+            <ContainerPP style={{marginTop: '7rem'}}>
                 <ApresentacaoPP>
                     <Titulo style={{ marginBottom: '1rem' }}>Política de Privacidade</Titulo>
                     <ParagrafoPP>

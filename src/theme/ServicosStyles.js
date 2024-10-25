@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ContainerServicos = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+margin-top: 7rem;
 `
 export const ApresentacaoServicos = styled.div`
   text-align: center;

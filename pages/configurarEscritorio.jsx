@@ -28,7 +28,7 @@ const ConfigurarEscritorio = () => {
     const [sucessEdit, setSucessEdit] = useState('');
     const [errorEdit, setErrorEdit] = useState('');
 
-    const [idFuncionario, setIdFuncionario] = useState('');
+    const [idFuncionarioRemove, setIdFuncionarioRemove] = useState('');
     const [sucessRemove, setSucessRemove] = useState('');
     const [errorRemove, setErrorRemove] = useState('');
 
@@ -158,8 +158,8 @@ const ConfigurarEscritorio = () => {
         setSucessRemove('');
 
         try {
-            if (idFuncionario) {
-                const response = await axios.delete(`http://localhost:3001/lex/funcionario/${idFuncionario}`);
+            if (idFuncionarioRemove) {
+                const response = await axios.delete(`http://localhost:3001/lex/funcionario/${idFuncionarioRemove}`);
 
                 if (response.data.error) {
                     setErrorRemove(response.data.error);
@@ -167,7 +167,7 @@ const ConfigurarEscritorio = () => {
                 } else {
                     setSucessRemove('Advogado removido com sucesso!');
                     setErrorRemove('');
-                    setIdFuncionario('');
+                    setIdFuncionarioRemove('');
                 }
             } else {
                 setErrorRemove('Por favor, forneça um ID válido.');
@@ -222,7 +222,7 @@ const ConfigurarEscritorio = () => {
 
     return (
         <React.Fragment>
-            <LinkBackToDashboard href='/userDashboard'>
+            <LinkBackToDashboard href='/userDashboard' style={{marginTop: '7rem'}}>
                 <FaArrowLeft />
                 Voltar ao Painel do usuário
             </LinkBackToDashboard>
@@ -319,8 +319,8 @@ const ConfigurarEscritorio = () => {
                                             name='id_func'
                                             id='id_func'
                                             placeholder='ID do Advogado'
-                                            value={idFuncionario}
-                                            onChange={(e) => setIdFuncionario(e.target.value)}
+                                            value={idFuncionarioRemove}
+                                            onChange={(e) => setIdFuncionarioRemove(e.target.value)}
                                         />
                                     </ContainerLabelInput>
                                     {sucessRemove && <StyledSuccess style={{ margin: '0' }}>{sucessRemove}</StyledSuccess>}
@@ -403,7 +403,7 @@ const ConfigurarEscritorio = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {funcionariosFiltrados.map(funcionario => (
+                            {Array.isArray(funcionariosFiltrados) && funcionariosFiltrados.map(funcionario => (
                                 <tr key={funcionario.id_funcionario}>
                                     <td>{funcionario.id_funcionario}</td>
                                     <td>{funcionario.nome_funcionario}</td>

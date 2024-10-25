@@ -8,7 +8,7 @@ export default function CentralDeAjuda() {
             <Head>
                 <title>Lex Libris - Central de Ajuda</title>
             </Head>
-            <ContainerCA>
+            <ContainerCA style={{marginTop: '7rem'}}>
                 <ApresentacaoCA>
                     <Titulo style={{marginBottom: '1rem'}}>Central de Ajuda</Titulo>
                     <ParagrafoCA>

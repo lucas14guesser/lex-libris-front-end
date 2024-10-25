@@ -45,7 +45,7 @@ function contato() {
         }
     }
     return (
-        <Container>
+        <Container style={{marginTop: '7rem'}}>
             <ContainerFormulario>
                 <Titulo style={{ margin: '3rem 0' }}>Contate-nos</Titulo>
                 <p style={{ marginBottom: '1rem' }}>Entre em contato conosco através de e-mail se estiver com alguma dúvida.</p>
