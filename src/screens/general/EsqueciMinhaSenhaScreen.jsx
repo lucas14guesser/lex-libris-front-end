@@ -19,7 +19,7 @@ export default function EsqueciMinhaSenhaScreen() {
             </Head>
             <ContainerFormulario>
                 <ContainerLogo />
-                <Titulo>
+                <Titulo style={{marginTop: '1rem'}}>
                     Esqueci minha senha
                 </Titulo>
                 <Formulario

@@ -12,7 +12,7 @@ export default function PaginaConfirmacaoScreen() {
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo />
-                    <Titulo>
+                    <Titulo style={{margin: '1rem 0'}}>
                         E-mail confirmado
                     </Titulo>
                     <ContainerTxtLinkPaginaConfirmacao>

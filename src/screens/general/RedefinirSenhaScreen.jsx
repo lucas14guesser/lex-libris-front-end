@@ -23,7 +23,7 @@ export default function RedefinirSenhaScreen() {
             <Container>
                 <ContainerFormulario>
                     <ContainerLogo />
-                    <Titulo>
+                    <Titulo style={{marginTop: '1rem'}}>
                         Redefinir Senha
                     </Titulo>
                     <Formulario

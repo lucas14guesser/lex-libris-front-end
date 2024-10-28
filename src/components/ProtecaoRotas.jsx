@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
 
-    const publicRoutes = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos', '/politicaPrivacidade', '/centralAjuda'];
+    const publicRoutes = ['/', '/login', '/cadastro', '/esqueciMinhaSenha', '/redefinirSenha', '/confirmacaoEmail', '/paginaConfirmacao', '/cadastrarEscritorio', '/planos', '/404', '/contato', '/servicos', '/politicaPrivacidade', '/centralAjuda'];
     const isPublicRoute = publicRoutes.includes(router.pathname);
 
     useEffect(() => {
